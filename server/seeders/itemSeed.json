@@ -1,0 +1,17 @@
+[
+  {
+    "name": "ToolKit",
+    "stock": 5,
+    "price": 9.99
+  },
+  {
+    "name": "Flashlight",
+    "stock": 10,
+    "price": 15.99
+  },
+  {
+    "name": "Medkit",
+    "stock": 15,
+    "price": 25.99
+  }
+]

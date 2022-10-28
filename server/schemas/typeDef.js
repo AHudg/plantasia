@@ -25,6 +25,14 @@ const typeDefs = gql`
     price: Float!
     vendor: Vendor!
   }
+
+  type Query {
+    clients: [Client]
+    client(username: String!): [Client]
+    vendors: [Vendor]
+    vendor(username: String!): [Vendor]
+    inventory: [Item]
+  }
 `;
 
 module.exports = typeDefs;

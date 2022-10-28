@@ -1,0 +1,30 @@
+[
+  {
+    "username": "The Nightmare",
+    "email": "nightmare@dbd.com",
+    "password": "4kills5gens",
+    "description": "Don't sleep on Elm Street.",
+    "phone": "1234567890"
+  },
+  {
+    "username": "The Onryo",
+    "email": "samara@dbd.com",
+    "password": "4kills5gens",
+    "description": "The Ring. Wells. TVs. Oh my!",
+    "phone": "1234567890"
+  },
+  {
+    "username": "The Nurse",
+    "email": "blink@dbd.com",
+    "password": "4kills5gens",
+    "description": "Chain blinking is exhausting.",
+    "phone": "1234567890"
+  },
+  {
+    "username": "The Executioner",
+    "email": "silenthill@dbd.com",
+    "password": "4kills5gens",
+    "description": "Queue the sirens.",
+    "phone": "1234567890"
+  }
+]
