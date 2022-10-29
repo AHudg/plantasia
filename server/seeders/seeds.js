@@ -10,9 +10,9 @@ db.once("open", async () => {
     await Vendor.deleteMany({});
     await Item.deleteMany({});
 
-    await Client.create(clientSeeds);
-    await Vendor.create(vendorSeeds);
-    await Item.create(itemSeeds);
+    await Client.insertMany(clientSeeds);
+    await Vendor.insertMany(vendorSeeds);
+    await Item.insertMany(itemSeeds);
   } catch (err) {
     console.error(err);
     process.exit(1);
