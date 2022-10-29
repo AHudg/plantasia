@@ -1,5 +1,5 @@
 const clientSeeds = require("./clientSeed.json");
-const vendorSeeds = require("./clientSeed.json");
+const vendorSeeds = require("./vendorSeed.json");
 const itemSeeds = require("./itemSeed.json");
 const db = require("../config/connection");
 const { Client, Vendor, Item } = require("../models");
