@@ -7,12 +7,35 @@ const { Client, Vendor, Item } = require("../models");
 db.once("open", async () => {
   try {
     await Client.deleteMany({});
-    await Vendor.deleteMany({});
-    await Item.deleteMany({});
+    // await Vendor.deleteMany({});
+    // await Item.deleteMany({});
 
-    await Client.insertMany(clientSeeds);
-    await Vendor.insertMany(vendorSeeds);
-    await Item.insertMany(itemSeeds);
+    const clientSeed = [
+      {
+        username: "Meg Thomas",
+        email: "quickandquiet@dbd.com",
+        password: "trytosurvive",
+      },
+      {
+        username: "Jonah Vasquez",
+        email: "correctiveaction@dbd.com",
+        password: "trytosurvive",
+      },
+      {
+        username: "Elodie Rakoto",
+        email: "deception@dbd.com",
+        password: "trytosurvive",
+      },
+      {
+        username: "Dwight Fairfield",
+        email: "provethyself@dbd.com",
+        password: "trytosurvive",
+      },
+    ];
+
+    await Client.insertMany(clientSeed);
+    // await Vendor.insertMany(vendorSeeds);
+    // await Item.insertMany(itemSeeds);
   } catch (err) {
     console.error(err);
     process.exit(1);
