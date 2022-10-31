@@ -1,17 +1,17 @@
 import React from "react";
-
+// on hover change image
+// on click route using state changes
 export default function Footer() {
   return (
-    <div className="row justify-content-start align-items-center mx-1">
-      <p className="col-11 text-center col-md-4 text-md-start contact">
-        Contact us!
-      </p>
-      <p className="col-11 text-center col-md-4 text-md-start contactInfo">
-        Phone: (555) 555-5555
-      </p>
-      <p className="col-11 text-center col-md-4 text-md-start contactInfo">
-        Email: customersupport@middleman.com
-      </p>
-    </div>
+    <footer className="row justify-content-center align-items-center m-0">
+      <div className="col-10 row justify-content-center align-items-center text-center contact">
+        <p className="col-4 col-md-4  my-1">Contact Us!</p>
+        <img
+          className="col-2 col-md-4 my-1 emblem"
+          src="./images/whitePhone.png"
+        />
+        <img className="col-2 col-md-4 emblem" src="./images/whiteEnv.png" />
+      </div>
+    </footer>
   );
 }

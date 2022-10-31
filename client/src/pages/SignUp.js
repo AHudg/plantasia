@@ -5,7 +5,7 @@ export default function SingUp() {
     e.preventDefault();
   };
   return (
-    <div>
+    <main>
       <form onSubmit={handleSubmit}>
         <input
           className="input"
@@ -40,6 +40,6 @@ export default function SingUp() {
         </a>
         .
       </p>
-    </div>
+    </main>
   );
 }

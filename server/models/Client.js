@@ -18,6 +18,13 @@ const clientSchema = new Schema({
     require: true,
     // minLength or some password validators to make it strong
   },
+  description: {
+    type: String,
+    trim: true,
+  },
+  phone: {
+    type: Number,
+  },
   //   vendorList: [
   //     {
   //       type: Schema.Types.ObjectId,

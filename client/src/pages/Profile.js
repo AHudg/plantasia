@@ -1,10 +1,12 @@
 import React from "react";
 
+import UserInfo from "../components/User Info";
+
 const Profile = (props) => {
   return (
-    <div>
-      <h2>This is the profile</h2>
-    </div>
+    <main>
+      <UserInfo></UserInfo>
+    </main>
   );
 };
 export default Profile;

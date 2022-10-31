@@ -5,7 +5,6 @@ const typeDefs = gql`
     _id: ID
     username: String!
     email: String!
-    vendorList: [Vendor]
   }
 
   type Vendor {
@@ -14,8 +13,6 @@ const typeDefs = gql`
     email: String!
     description: String
     phone: Int
-    clientList: [Client]
-    inventory: [Item]
   }
 
   type Item {

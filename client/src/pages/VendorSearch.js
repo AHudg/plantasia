@@ -2,9 +2,9 @@ import React from "react";
 
 const Vendor = (props) => {
   return (
-    <div>
+    <main>
       <h2>This is the vendor list for clients to search</h2>
-    </div>
+    </main>
   );
 };
 export default Vendor;

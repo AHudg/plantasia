@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Navigation() {
   return (
-    <div className="">
+    <nav className="">
       <ul className="row justify-content-around m-0 p-0">
         <li className="col-4">
           <a className="navLink" href="/profile">
@@ -20,6 +20,6 @@ export default function Navigation() {
           </a>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 }

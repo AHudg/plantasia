@@ -6,7 +6,7 @@ export default function Login() {
     e.preventDefault();
   };
   return (
-    <div>
+    <main>
       <form onSubmit={handleSubmit}>
         <input
           className="input"
@@ -38,6 +38,6 @@ export default function Login() {
         </a>{" "}
         to sign up now!
       </p>
-    </div>
+    </main>
   );
 }
