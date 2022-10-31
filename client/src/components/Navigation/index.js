@@ -1,5 +1,5 @@
 import React from "react";
-
+// TODO need conditional navigation for client/vendor and no nav for login/signup
 export default function Navigation() {
   return (
     <nav className="">
