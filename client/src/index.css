@@ -26,10 +26,6 @@ ul {
 }
 
 /* header/navigation */
-/* .header {
-  position: fixed;
-} */
-
 .logo {
   width: 60px;
   margin-top: 15px;
@@ -58,4 +54,20 @@ a:link {
   position: relative;
   top: -50px;
   z-index: -1;
+}
+
+/* profile page */
+
+/* footer */
+.contact {
+  color: var(--primary);
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.contactInfo {
+  color: var(--primary);
+  font-size: 13px;
+  font-style: italic;
+  margin-bottom: 10px;
 }
