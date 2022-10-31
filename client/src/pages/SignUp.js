@@ -33,6 +33,13 @@ export default function SingUp() {
         ></input>
         <button type="submit">Submit</button>
       </form>
+      <p>
+        If you are already a member of our community, please log in{" "}
+        <a className="" href="/">
+          here
+        </a>
+        .
+      </p>
     </div>
   );
 }

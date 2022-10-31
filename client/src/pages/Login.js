@@ -26,6 +26,18 @@ export default function Login() {
         ></input>
         <button type="submit">Submit</button>
       </form>
+      <p>
+        If you don't have an account with us, we'd love to help you connect with
+        clients!
+      </p>
+      <p>
+        {" "}
+        Click{" "}
+        <a className="" href="/signup">
+          here
+        </a>{" "}
+        to sign up now!
+      </p>
     </div>
   );
 }

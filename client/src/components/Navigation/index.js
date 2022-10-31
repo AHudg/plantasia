@@ -2,20 +2,22 @@ import React from "react";
 
 export default function Navigation() {
   return (
-    <div>
-      <ul>
-        <li>
-          <a className="" href="">
-            My Vendor List
+    <div className="">
+      <ul className="row justify-content-around m-0 p-0">
+        <li className="col-4">
+          <a className="navLink" href="/profile">
+            Profile
           </a>
         </li>
-        <li>
-          <a className="" href="">
-            Vendor Search
+        <li className="col-4">
+          <a className="navLink" href="/vendors">
+            Dashboard
           </a>
         </li>
-        <li>
-          <span>Settings</span>
+        <li className="col-4">
+          <a className="navLink" href="/settings">
+            Settings
+          </a>
         </li>
       </ul>
     </div>
