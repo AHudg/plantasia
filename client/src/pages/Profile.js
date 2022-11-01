@@ -25,9 +25,11 @@ const Profile = (props) => {
     console.log(screenSize);
     if (screenSize > 768) {
       return (
-        <div>
-          <UserList></UserList>
-          <p>The actual past orders</p>
+        <div className="row">
+          <div className="col-7">
+            <UserList></UserList>
+          </div>
+          <div className="col-4"></div>
         </div>
       );
     } else {

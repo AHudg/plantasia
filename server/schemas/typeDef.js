@@ -25,9 +25,9 @@ const typeDefs = gql`
 
   type Query {
     clients: [Client]
-    client(username: String!): [Client]
+    client(username: String!): Client
     vendors: [Vendor]
-    vendor(username: String!): [Vendor]
+    vendor(username: String!): Vendor
     inventory: [Item]
   }
 `;
