@@ -30,10 +30,10 @@ const vendorSchema = new Schema({
   phone: {
     type: Number,
   },
-  clientList: [
+  friend: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Client",
+      ref: "Friend",
     },
   ],
   inventory: [
