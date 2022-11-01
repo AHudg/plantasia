@@ -18,6 +18,10 @@ const vendorSchema = new Schema({
     require: true,
     // minLength or some password validators to make it strong
   },
+  shopName: {
+    type: String,
+    require: true,
+  },
   description: {
     type: String,
     trim: true,

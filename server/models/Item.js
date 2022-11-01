@@ -14,10 +14,10 @@ const itemSchema = new Schema({
     type: Number,
     require: true,
   },
-    vendor: {
-      type: Schema.Types.ObjectId,
-      ref: "Vendor",
-    },
+  vendor: {
+    type: Schema.Types.ObjectId,
+    ref: "Vendor",
+  },
 });
 
 const Item = model("Item", itemSchema);

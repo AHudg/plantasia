@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server-express");
-const { signToken } = require('../utils/Authentication');
+const { signToken } = require("../utils/Authentication");
 
 const typeDefs = gql`
   type Client {
@@ -13,8 +13,11 @@ const typeDefs = gql`
     _id: ID
     username: String!
     email: String!
+    shopname: String!
     description: String
     phone: Int
+    clientList: [Client]
+    inventory: [Item]
   }
 
   type Item {
@@ -38,11 +41,16 @@ const typeDefs = gql`
     items: [Item]
   }
 
-  type Mutation{
+  type Mutation {
     loginClient(email: String!, password: String!): Auth
     loginVendor(email: String!, password: String!): Auth
-    addClient(username: String! email: String!, shopname: String! password: String!): Auth
-    addVendor(username: String! email: String!, password: String!): Vendor
+    addClient(
+      username: String!
+      email: String!
+      shopname: String!
+      password: String!
+    ): Auth
+    addVendor(username: String!, email: String!, password: String!): Vendor
   }
 `;
 
