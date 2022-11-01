@@ -27,14 +27,13 @@ const typeDefs = gql`
     stock: Int!
     price: Float!
     vendor: [Vendor]
-    
   }
 
   type Ordered {
     _id: ID
     createdAt: String
-    client: Client, 
-    vendor: Vendor,
+    client: Client
+    vendor: Vendor
     items: Item
     total: Int
   }
@@ -54,9 +53,9 @@ const typeDefs = gql`
     client(username: String!): Client
     vendors: [Vendor]
     vendor(username: String!): Vendor
-    items (username: String): [Item]
+    items(username: String): [Item]
     pastOrders: [Ordered]
-    }
+  }
 
   type Mutation {
     loginClient(email: String!, password: String!): clientAuth
@@ -73,14 +72,10 @@ const typeDefs = gql`
       shopName: String!
       password: String!
     ): vendorAuth
-    addItem (
-      name: String!
-      stock: Int!
-      price: Int!
-    ) : Item
+    addItem(name: String!, stock: Int!, price: Int!): Item
     addVendToClient(vendorId: ID!): Client
+    addClientToVendor(clientId: ID!): Vendor
   }
-
 `;
 
 module.exports = typeDefs;
