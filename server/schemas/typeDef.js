@@ -28,10 +28,16 @@ const typeDefs = gql`
     vendor: [Vendor]
   }
 
-  type Auth {
+  type clientAuth {
     token: ID!
     client: Client
   }
+
+  type vendorAuth {
+    token: ID!
+    vendor: Vendor
+  }
+
 
   type Query {
     clients: [Client]
@@ -42,15 +48,20 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    loginClient(email: String!, password: String!): Auth
-    loginVendor(email: String!, password: String!): Auth
+    loginClient(email: String!, password: String!): clientAuth
+    loginVendor(email: String!, password: String!): vendorAuth
     addClient(
       username: String!
       email: String!
       shopName: String!
       password: String!
-    ): Auth
-    addVendor(username: String! email: String! shopName:String! password: String!): Auth
+    ): clientAuth
+    addVendor(
+      username: String!
+      email: String!
+      shopName: String!
+      password: String!
+    ): vendorAuth
   }
 `;
 
