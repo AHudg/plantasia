@@ -8,25 +8,24 @@ const resolvers = {
   Query: {
     // used to query all clients - used to populate vendor's client list
     clients: async () => {
-      return Client.find({});
+      return Client.find({}).populate("vendorList");
     },
     // used to query specific client - used for vendor clicking on his client's profile from client list
     client: async (parent, { username }) => {
-      return Client.findOne({ username });
+      return Client.findOne({ username }).populate("vendorList");
     },
     // used to query all vendors - used for clients to look at all potential vendors
     vendors: async () => {
-      return Vendor.find()
-        .populate('inventory');
+      return Vendor.find().populate("inventory").populate("clientList");
     },
     // used to query one vendor - used by clients that click on specific vendor profile and access inventory
     vendor: async (parent, { username }) => {
-      return Vendor.findOne({ username });
+      return Vendor.findOne({ username }).populate("clientList");
     },
     // used to query all items at the moment - somehow needs to search by vendor id to return their inventory
     items: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Item.find(params).populate('vendor');
+      return Item.find(params).populate("vendor");
     },
   },
   Mutation: {
@@ -77,43 +76,52 @@ const resolvers = {
     },
 
     addItem: async (parent, args, context) => {
-      console.log('args', args)
-      console.log('user logged on', context.user)
+      console.log("args", args);
+      console.log("user logged on", context.user);
       if (context.user) {
-        const item = await Item.create(
-          { ...args, vendor: context.user._id })
-        
-        console.log(item)
-        
+        const item = await Item.create({ ...args, vendor: context.user._id });
+
+        console.log(item);
+
         const vendor = await Vendor.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { inventory: item._id } },
           { new: true }
         );
 
-        console.log(vendor)
-        
+        console.log(vendor);
+
         return item;
       }
     },
-      addVendToClient: async (parent, { vendorId }, context) => {
-        console.log(vendorId);
-  
-        if (context.user) {
-          const updateVendorList = await Client.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $addToSet: { vendorList: vendorId } },
-            { new: true }
-          ).populate("vendorList");
-  
-          console.log(updateVendorList);
-  
-          return updateVendorList;
-        }
-        throw new AuthenticationError("You need to be logged in!");
+
+    addVendToClient: async (parent, { vendorId }, context) => {
+      if (context.user) {
+        const updateVendorList = await Client.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { vendorList: vendorId } },
+          { new: true }
+        ).populate("vendorList");
+
+        return updateVendorList;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
     },
-      
-  }
-}
+    addClientToVendor: async (parent, { clientId }, context) => {
+      if (context.user) {
+        const updateClientList = await Vendor.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { clientList: clientId } },
+          { new: true }
+        ).populate("clientList");
+
+        return updateClientList;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
+  },
+};
 
 module.exports = resolvers;
