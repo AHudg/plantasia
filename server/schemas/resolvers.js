@@ -1,5 +1,9 @@
 const { Client, Vendor, Item } = require("../models");
 
+const { signToken } = require('../utils/authentication');
+// authetication error if username or password is wrong
+const { AuthenticationError } = require('apollo-server-express');
+
 const resolvers = {
   Query: {
     // used to query all clients - used to populate vendor's client list
@@ -36,8 +40,22 @@ const resolvers = {
       return vendor; 
     },
 
-    login: async () => {
+    login: async (parent, {email, password}) => {
+      const client = await Client.findOne({ email });
 
+      if (!client) {
+        throw new AuthenticationError('Incorrect Login Credentials');
+      };
+
+      const correctPassword = await client.isCorrectPassword(password);
+
+      if (!correctPassword) {
+        throw new AuthenticationError('Incorrect Login Credentials');
+      };
+
+      const token = signToken(client);
+
+      return {token, client};
     }
   }
 

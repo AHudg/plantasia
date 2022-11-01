@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require('bcrypt')
 
 const clientSchema = new Schema({
   username: {
@@ -17,12 +18,12 @@ const clientSchema = new Schema({
     type: String,
     require: true,
     unique: true,
-    // match: [regex expression, 'Must match a valid email address.']
+    match: [/.+@.+\..+/, 'Must match an email address!']
   },
   password: {
     type: String,
     require: true,
-    // minLength or some password validators to make it strong
+    minlength: 11
   },
   description: {
     type: String,
@@ -44,6 +45,19 @@ const clientSchema = new Schema({
       },
     ],
 });
+
+clientSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltrounds = 10;
+    this.password = await bcrypt.hash(this.password, saltrounds);
+  }
+  next();
+});
+
+clientSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 
 const Client = model("Client", clientSchema);
 
