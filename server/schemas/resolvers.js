@@ -40,6 +40,7 @@ const resolvers = {
       return vendor; 
     },
 
+    // TODO: 
     login: async (parent, {email, password}) => {
       const client = await Client.findOne({ email });
 
@@ -47,7 +48,7 @@ const resolvers = {
         throw new AuthenticationError('Incorrect Login Credentials');
       };
 
-      const correctPassword = await client.isCorrectPassword(password);
+      const correctPassword = await client.isCorrectPassword({ password });
 
       if (!correctPassword) {
         throw new AuthenticationError('Incorrect Login Credentials');
