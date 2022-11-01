@@ -33,10 +33,10 @@ const clientSchema = new Schema({
   phone: {
     type: Number,
   },
-  vendorList: [
+  friend: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Vendor",
+      ref: "Friend",
     },
   ],
   past: [Ordered.schema],

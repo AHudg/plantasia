@@ -1,4 +1,4 @@
-const { Client, Vendor, Item, Ordered } = require("../models");
+const { Client, Vendor, Item, Ordered, Friend } = require("../models");
 
 const { signToken } = require("../utils/Authentication");
 // authetication error if username or password is wrong
@@ -8,19 +8,27 @@ const resolvers = {
   Query: {
     // used to query all clients - used to populate vendor's client list
     clients: async () => {
-      return Client.find({}).populate("vendorList");
+      return Client.find({}).populate('friend');
     },
     // used to query specific client - used for vendor clicking on his client's profile from client list
     client: async (parent, { username }) => {
-      return Client.findOne({ username }).populate("vendorList");
+      return Client.findOne({ username })
+        .populate('friend')
+        
     },
+
+
     // used to query all vendors - used for clients to look at all potential vendors
     vendors: async () => {
-      return Vendor.find().populate("inventory").populate("clientList");
+      return Vendor.find()
+        .populate('inventory')
+        .populate('friend')
+        
     },
     // used to query one vendor - used by clients that click on specific vendor profile and access inventory
     vendor: async (parent, { username }) => {
-      return Vendor.findOne({ username }).populate("clientList");
+      return Vendor.findOne({ username }).populate('friend').populate('client').populate('inventory')
+      ;
     },
     // used to query all items at the moment - somehow needs to search by vendor id to return their inventory
     items: async (parent, { username }) => {
@@ -31,6 +39,11 @@ const resolvers = {
     pastOrders: async () => {
       return Ordered.find({});
     },
+
+    friend: async () => {
+      return Friend.find({}).populate('client').populate('vendor')
+    }
+  
   },
   Mutation: {
     addClient: async (parent, args) => {
@@ -80,52 +93,104 @@ const resolvers = {
     },
 
     addItem: async (parent, args, context) => {
-      console.log("args", args);
-      console.log("user logged on", context.user);
+     
       if (context.user) {
-        const item = await Item.create({ ...args, vendor: context.user._id });
-
-        console.log(item);
-
-        const vendor = await Vendor.findByIdAndUpdate(
+        const item = await Item.create(
+          { ...args, vendor: context.user._id })
+        
+        await Vendor.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { inventory: item._id } },
           { new: true }
         );
-
-        console.log(vendor);
-
         return item;
       }
     },
-
-    addVendToClient: async (parent, { vendorId }, context) => {
+    // TODO: Old add to friends type code. 
+    //   addVendToClient: async (parent, { vendorId }, context) => {
+    //     console.log(vendorId);
+  
+    //     if (context.user) {
+    //       const updateVendorList = await Client.findByIdAndUpdate(
+    //         { _id: context.user._id },
+    //         { $addToSet: { vendorList: vendorId } },
+    //         { new: true }
+    //       ).populate("vendorList");
+  
+    //       console.log(updateVendorList);
+  
+    //       return updateVendorList;
+    //     }
+    //     throw new AuthenticationError("You need to be logged in!");
+    // },
+    // Vendor is adding a client as friend 
+    addClientFriend: async (parent, { client }, context) => {
       if (context.user) {
-        const updateVendorList = await Client.findByIdAndUpdate(
+        const friendship = {
+          client: client,
+          vendor: context.user._id,
+          status: 2
+        }
+        const updateFriendship = await Friend.create(friendship);
+
+        await Vendor.findByIdAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { vendorList: vendorId } },
+          { $addToSet: { friend: updateFriendship._id } },
           { new: true }
-        ).populate("vendorList");
+        );
 
-        return updateVendorList;
+        await Client.findByIdAndUpdate(
+          { _id: client },
+          { $addToSet: { friend: updateFriendship._id } },
+          { new: true }
+        )
+        return updateFriendship;
       }
-
-      throw new AuthenticationError("You need to be logged in!");
+      
     },
-    addClientToVendor: async (parent, { clientId }, context) => {
+    // client is adding vendor as friend
+    addVendorFriend: async (parent, { vendor }, context) => {
       if (context.user) {
-        const updateClientList = await Vendor.findByIdAndUpdate(
+        const friendship = {
+          client: context.user._id,
+          vendor: vendor,
+          status: 1
+        }
+        const updateFriendship = await Friend.create(friendship);
+
+        await Client.findByIdAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { clientList: clientId } },
+          { $addToSet: { friend: updateFriendship._id } },
           { new: true }
-        ).populate("clientList");
+        );
 
-        return updateClientList;
+        await Vendor.findByIdAndUpdate(
+          { _id: vendor },
+          { $addToSet: { friend: updateFriendship._id } },
+          { new: true }
+        )
+        return updateFriendship;
       }
-
-      throw new AuthenticationError("You need to be logged in!");
     },
-  },
-};
+    
+    acceptFriendReq: async (parent, { friendship }, context) => {
+     if (context.user) {
+       return await Friend.findByIdAndUpdate(
+         { _id: friendship },
+         { status: 0 },
+         { new: true }
+       );
+     }
+    },
+    deleteFriendReq: async (parent, { friendship }, context) => {
+      if (context.user) {
+        return await Friend.findByIdAndDelete(
+          { _id: friendship }
+        );
+      }
+   }
+   
+  }
+}
 
 module.exports = resolvers;

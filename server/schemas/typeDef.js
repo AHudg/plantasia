@@ -7,7 +7,7 @@ const typeDefs = gql`
     username: String!
     shopName: String!
     email: String!
-    vendorList: [Vendor]
+    friend: [Friend]
   }
 
   type Vendor {
@@ -17,7 +17,7 @@ const typeDefs = gql`
     shopName: String!
     description: String
     phone: Int
-    clientList: [Client]
+    friend: [Friend]
     inventory: [Item]
   }
 
@@ -32,10 +32,17 @@ const typeDefs = gql`
   type Ordered {
     _id: ID
     createdAt: String
-    client: Client
+    client: Client 
     vendor: Vendor
     items: Item
     total: Int
+  }
+
+  type Friend {
+    _id: ID
+    client: Client
+    vendor: Vendor
+    status: Int!
   }
 
   type clientAuth {
@@ -55,7 +62,8 @@ const typeDefs = gql`
     vendor(username: String!): Vendor
     items(username: String): [Item]
     pastOrders: [Ordered]
-  }
+    friend: [Friend]
+    }
 
   type Mutation {
     loginClient(email: String!, password: String!): clientAuth
@@ -74,7 +82,18 @@ const typeDefs = gql`
     ): vendorAuth
     addItem(name: String!, stock: Int!, price: Int!): Item
     addVendToClient(vendorId: ID!): Client
-    addClientToVendor(clientId: ID!): Vendor
+    addClientFriend(
+      client: ID!
+    ): Friend
+    addVendorFriend(
+      vendor: ID!
+    ): Friend
+    acceptFriendReq(
+      friendship: ID!
+    ): Friend
+    deleteFriendReq(
+      friendship: ID!
+    ): Friend
   }
 `;
 
