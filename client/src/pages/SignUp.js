@@ -1,73 +1,141 @@
 import React, { useState } from "react";
 
-export default function SingUp() {
-  const handleSubmit = (e) => {
+import { useMutation } from "@apollo/client";
+import { SIGNUP_CLIENT, SIGNUP_VENDOR } from "../utils/mutations";
+
+import Auth from "../utils/auth";
+
+export default function SignUp(props) {
+  const { user, setCurrentUser } = props;
+  const [addClient] = useMutation(SIGNUP_CLIENT);
+  const [addVendor] = useMutation(SIGNUP_VENDOR);
+
+  const [formState, setFormState] = useState({
+    username: "",
+    email: "",
+    shopName: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    // does this take the formState using "..." as the rest operator and replace [name]: original w/ [name]: value because [name] matches?
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (user === "Client") {
+      try {
+        const { token, client } = await addClient({
+          variables: { ...formState }
+        });
+        console.log(token, client);
+
+        // Auth.login(client.addClient.token);
+      } catch (e) {
+        console.log(e);
+      }
+
+    } else if (user === 'Vendor') {
+      try {
+        const { token, vendor } = await addVendor({
+          variables: { ...formState }
+        });
+        console.log(token, vendor)
+
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   return (
     <main>
-      <img src="./images/loginBg.png" className="loginImage"></img>
+      <img
+        src="./images/loginBg.png"
+        alt="Orange and blue ribbons for aesthetic background."
+        className="loginImage"
+      ></img>
       <h2 className="loginTitle">Sign Up</h2>
       <form className="loginForm" onSubmit={handleSubmit}>
         <div className="row justify-content-center m-1 mt-2">
-          <div className="col-12 mt-2 row">
-            <p className="col-6 text-end">Client</p>
-            <p className="col-6">Vendor</p>
+          <div className="col-12 mt-2 row justify-content-center">
+            <p
+              className={
+                user === "Client"
+                  ? "col-3 text-center activeClient"
+                  : "col-3 text-center"
+              }
+              onClick={() => {
+                setCurrentUser("Client");
+              }}
+            >
+              Client
+            </p>
+            <p
+              className={
+                user === "Vendor"
+                  ? "col-3 text-center activeVendor"
+                  : "col-3 text-center"
+              }
+              onClick={() => {
+                setCurrentUser("Vendor");
+              }}
+            >
+              Vendor
+            </p>
           </div>
           <div className="col-12 my-2 row">
-            <label className="col-4 text-end">First Name: </label>
+            <label className="col-4 text-end">Username: </label>
             <input
               className="col-8"
-              placeholder="first"
-              name="first"
-              type="first"
-              id="first"
-              // value, and onChange can be added here
-            ></input>
-          </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Last Name: </label>
-            <input
-              className="col-8"
-              placeholder="last"
-              name="last"
-              type="last"
-              id="last"
-              // value, and onChange can be added here
+              placeholder="Username"
+              name="username"
+              type="username"
+              id="username"
+              value={formState.username}
+              onChange={handleChange}
             ></input>
           </div>
           <div className="col-12 my-2 row">
             <label className="col-4 text-end">Shop Name: </label>
             <input
               className="col-8"
-              placeholder="shop"
-              name="shop"
-              type="shop"
-              id="shop"
-              // value, and onChange can be added here
+              placeholder="Shop Name"
+              name="shopName"
+              type="shopName"
+              id="shopName"
+              value={formState.shopName}
+              onChange={handleChange}
             ></input>
           </div>
           <div className="col-12 my-2 row">
             <label className="col-4 text-end">Email: </label>
             <input
               className="col-8"
-              placeholder="email"
+              placeholder="Email"
               name="email"
               type="email"
               id="email"
-              // value, and onChange can be added here
+              value={formState.email}
+              onChange={handleChange}
             ></input>
           </div>
           <div className="col-12 my-2 row">
             <label className="col-4 text-end">Password: </label>
             <input
               className="col-8"
-              placeholder="password"
               name="password"
               type="password"
               id="password"
-              // value, and onChange can be added here
+              value={formState.password}
+              onChange={handleChange}
             ></input>
           </div>
           <button className="col-4 my-2" type="submit">

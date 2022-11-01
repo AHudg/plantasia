@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function Login() {
+export default function Login(props) {
+  const { user, setCurrentUser } = props;
+
   // TODO form handlers can go here
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -8,13 +10,39 @@ export default function Login() {
 
   return (
     <main>
-      <img src="./images/loginBg.png" className="loginImage"></img>
+      <img
+        src="./images/loginBg.png"
+        alt="Orange and blue ribbons for aesthetic background."
+        className="loginImage"
+      ></img>
       <h2 className="loginTitle">Log In</h2>
       <form className="loginForm" onSubmit={handleSubmit}>
         <div className="row justify-content-center m-1 mt-2">
-          <div className="col-12 mt-2 row">
-            <p className="col-6 text-end">Client</p>
-            <p className="col-6">Vendor</p>
+          <div className="col-12 mt-2 row justify-content-center">
+            <p
+              className={
+                user === "Client"
+                  ? "col-3 text-center activeClient"
+                  : "col-3 text-center"
+              }
+              onClick={() => {
+                setCurrentUser("Client");
+              }}
+            >
+              Client
+            </p>
+            <p
+              className={
+                user === "Vendor"
+                  ? "col-3 text-center activeVendor"
+                  : "col-3 text-center"
+              }
+              onClick={() => {
+                setCurrentUser("Vendor");
+              }}
+            >
+              Vendor
+            </p>
           </div>
           <div className="col-12 mb-1 row">
             <label className="col-4 text-end">Email: </label>

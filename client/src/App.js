@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // ApolloProvider is a React component that is used to provide data to all other components
 // ApolloClient is a constructor function that will help initialize the connecttion to the GraphQL API server
 // InMemoryCache enables Apollo Client instance to cache API response data to perform request efficiently
@@ -32,6 +32,8 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [user, setCurrentUser] = useState("Client");
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -40,8 +42,14 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Landing />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+              <Route
+                path="/login"
+                element={<Login user={user} setCurrentUser={setCurrentUser} />}
+              />
+              <Route
+                path="/signup"
+                element={<SignUp user={user} setCurrentUser={setCurrentUser} />}
+              />
               <Route path="/profile" element={<Profile />} />
               <Route path="/vendors" element={<Search />} />
               <Route path="/settings" element={<Settings />} />
