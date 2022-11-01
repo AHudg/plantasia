@@ -16,15 +16,17 @@ const resolvers = {
     },
     // used to query all vendors - used for clients to look at all potential vendors
     vendors: async () => {
-      return Vendor.find();
+      return Vendor.find()
+        .populate('inventory');
     },
     // used to query one vendor - used by clients that click on specific vendor profile and access inventory
     vendor: async (parent, { username }) => {
       return Vendor.findOne({ username });
     },
     // used to query all items at the moment - somehow needs to search by vendor id to return their inventory
-    items: async () => {
-      return Item.find();
+    items: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Item.find(params).populate('vendor');
     },
   },
   Mutation: {
@@ -73,7 +75,30 @@ const resolvers = {
       const token = signToken(vendor);
       return { token, vendor };
     },
-  },
-};
+
+    addItem: async (parent, args, context) => {
+      console.log('args',args)
+      console.log('user logged on',context.user)
+      if (context.user) {
+        const item = await Item.create(
+          { ...args, vendor: context.user._id })
+        
+        console.log(item)
+        
+        const vendor = await Vendor.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { inventory: item._id } },
+          { new: true }
+        );
+
+        console.log(vendor)
+        
+        return item;
+      }
+      
+    }
+  }
+}
+
 
 module.exports = resolvers;

@@ -3,18 +3,18 @@
     "name": "ToolKit",
     "stock": 5,
     "price": 9.99,
-    "vendor": "636126c284ebe88df81baded"
+    "username": "The Nightmare"
   },
   {
     "name": "Flashlight",
     "stock": 10,
     "price": 15.99,
-    "vendor": "636126c284ebe88df81baded"
+    "username": "The Nightmare"
   },
   {
     "name": "Medkit",
     "stock": 15,
     "price": 25.99,
-    "vendor": "636126c284ebe88df81baded"
+    "username": "The Nightmare"
   }
 ]

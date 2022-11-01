@@ -14,12 +14,19 @@ const itemSchema = new Schema({
     type: Number,
     require: true,
   },
-  vendor: {
-    type: Schema.Types.ObjectId,
-    ref: "Vendor",
-  },
-});
-
+  vendor: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Vendor",
+    },
+  ],
+},
+  {
+    toJSON: {
+      getters: true
+    }
+  }
+);
 const Item = model("Item", itemSchema);
 
 module.exports = Item;
