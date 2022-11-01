@@ -30,6 +30,15 @@ const typeDefs = gql`
     
   }
 
+  type Ordered {
+    _id: ID
+    createdAt: String
+    client: Client, 
+    vendor: Vendor,
+    items: Item
+    total: Int
+  }
+
   type clientAuth {
     token: ID!
     client: Client
@@ -46,7 +55,8 @@ const typeDefs = gql`
     vendors: [Vendor]
     vendor(username: String!): Vendor
     items (username: String): [Item]
-  }
+    pastOrders: [Ordered]
+    }
 
   type Mutation {
     loginClient(email: String!, password: String!): clientAuth

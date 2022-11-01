@@ -1,4 +1,4 @@
-const { Client, Vendor, Item } = require("../models");
+const { Client, Vendor, Item, Ordered } = require("../models");
 
 const { signToken } = require("../utils/Authentication");
 // authetication error if username or password is wrong
@@ -27,6 +27,10 @@ const resolvers = {
     items: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Item.find(params).populate('vendor');
+    },
+
+    pastOrders: async () => {
+      return Ordered.find({});
     },
   },
   Mutation: {

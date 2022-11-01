@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const Ordered = require('./Ordered');
 
 const clientSchema = new Schema({
   username: {
@@ -38,12 +39,7 @@ const clientSchema = new Schema({
       ref: "Vendor",
     },
   ],
-  past: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Item",
-    },
-  ],
+  past: [Ordered.schema],
 });
 
 clientSchema.pre("save", async function (next) {
