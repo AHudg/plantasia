@@ -44,11 +44,11 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route
                 path="/login"
-                element={<Login user={user} setCurrentUser={setCurrentUser} />}
+                element={<Login user={user} setCurrentUser={setCurrentUser}></Login>}
               />
               <Route
                 path="/signup"
-                element={<SignUp user={user} setCurrentUser={setCurrentUser} />}
+                element={<SignUp user={user} setCurrentUser={setCurrentUser} ></SignUp>}
               />
               <Route path="/profile" element={<Profile />} />
               <Route path="/vendors" element={<Search />} />

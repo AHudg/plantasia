@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
 import { useMutation } from "@apollo/client";
-import { SIGNUP_CLIENT, SIGNUP_VENDOR } from "../utils/mutations";
+import { ADD_CLIENT, SIGNUP_VENDOR } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
 export default function SignUp(props) {
   const { user, setCurrentUser } = props;
-  const [addClient] = useMutation(SIGNUP_CLIENT);
-  const [addVendor] = useMutation(SIGNUP_VENDOR);
+ 
 
   const [formState, setFormState] = useState({
     username: "",
@@ -16,6 +15,8 @@ export default function SignUp(props) {
     shopName: "",
     password: "",
   });
+  const [addClient] = useMutation(ADD_CLIENT);
+  const [addVendor] = useMutation(SIGNUP_VENDOR);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,23 +33,22 @@ export default function SignUp(props) {
 
     if (user === "Client") {
       try {
-        const { token, client } = await addClient({
+        const { data } = await addClient({
           variables: { ...formState }
         });
-        console.log(token, client);
-
-        // Auth.login(client.addClient.token);
+        
+        Auth.login(data.addClient.token);
       } catch (e) {
         console.log(e);
       }
 
     } else if (user === 'Vendor') {
       try {
-        const { token, vendor } = await addVendor({
+        const { data } = await addVendor({
           variables: { ...formState }
         });
-        console.log(token, vendor)
-
+        console.log(data)
+        Auth.login(data.addVendor.token);
       } catch (e) {
         console.log(e);
       }
