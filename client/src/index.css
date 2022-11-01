@@ -87,8 +87,22 @@ a:link {
 .loginImage {
   width: 100%;
   position: absolute;
-  top: 25px;
+  top: 40px;
   z-index: -1;
+}
+
+.activeClient {
+  color: var(--orange);
+  font-size: large;
+  font-weight: bold;
+  border-bottom: solid var(--primary) 2px;
+}
+
+.activeVendor {
+  color: var(--blue);
+  font-size: large;
+  font-weight: bold;
+  border-bottom: solid var(--primary) 2px;
 }
 
 .loginForm {
