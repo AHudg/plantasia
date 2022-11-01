@@ -19,3 +19,14 @@ export const QUERY_VENDORS = gql`
     }
   }
 `;
+
+export const QUERY_ITEMS = gql`
+  query items {
+    items {
+      _id
+      name
+      stock
+      price
+    }
+  }
+`;

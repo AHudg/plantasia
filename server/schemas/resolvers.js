@@ -24,7 +24,7 @@ const resolvers = {
       return Vendor.findOne({ username });
     },
     // used to query all items at the moment - somehow needs to search by vendor id to return their inventory
-    inventory: async () => {
+    items: async () => {
       return Item.find();
     },
   },

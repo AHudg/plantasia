@@ -34,6 +34,10 @@ p {
   color: var(--primary);
 }
 
+label {
+  color: var(--primary);
+}
+
 .noMargin {
   margin: 0;
 }
@@ -65,7 +69,6 @@ a:link {
 .landingImage {
   width: 100%;
   position: relative;
-  top: -50px;
   z-index: -1;
 }
 
@@ -73,13 +76,31 @@ a:link {
   font-style: italic;
   font-weight: 300;
   position: relative;
-  top: -50px;
 }
 
 .landingLink {
   margin-bottom: 150px;
   position: relative;
-  top: -50px;
+}
+
+/* login/signup */
+.loginImage {
+  width: 100%;
+  position: absolute;
+  top: 25px;
+  z-index: -1;
+}
+
+.loginForm {
+  position: relative;
+  top: 30px;
+}
+
+.loginTitle {
+  color: var(--primary);
+  text-align: center;
+  position: relative;
+  top: 30px;
 }
 
 /* profile page */
@@ -103,10 +124,6 @@ a:link {
 }
 
 /* vendor search list */
-.searchLabel {
-  color: var(--primary);
-}
-
 .searchInput {
   color: var(--orange);
   border-radius: 10px;
@@ -173,4 +190,37 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .emblem {
   height: 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .landingImage {
+    top: -30px;
+  }
+
+  .landingText {
+    top: -75px;
+  }
+
+  .landingLink {
+    top: -75px;
+    margin-bottom: 0;
+  }
+
+  .emblem {
+    height: 20%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .landingImage {
+    top: -90px;
+  }
+
+  .landingText {
+    top: -150px;
+  }
+
+  .landingLink {
+    top: -150px;
+  }
 }
