@@ -1,6 +1,6 @@
 const { Client, Vendor, Item } = require("../models");
 
-const { signToken } = require('../utils/authentication');
+const { signToken } = require('../utils/Authentication');
 // authetication error if username or password is wrong
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -31,8 +31,9 @@ const resolvers = {
   Mutation: {
     addClient: async (parent, args) => {
       const client = await Client.create(args);
+      const token = signToken(client)
 
-      return client; 
+      return {token, client}; 
     },
     addVendor: async (parent, args) => {
       const vendor = await Vendor.create(args);
@@ -41,23 +42,22 @@ const resolvers = {
     },
 
     // TODO: 
-    login: async (parent, {email, password}) => {
+    login: async (parent, { email, password }) => {
       const client = await Client.findOne({ email });
 
       if (!client) {
-        throw new AuthenticationError('Incorrect Login Credentials');
-      };
+        throw new AuthenticationError('Incorrect credentials');
+      }
 
-      const correctPassword = await client.isCorrectPassword({ password });
+      const correctPassword = await client.isCorrectPassword(password);
 
       if (!correctPassword) {
-        throw new AuthenticationError('Incorrect Login Credentials');
-      };
+        throw new AuthenticationError('Incorrect credentials');
+      }
 
       const token = signToken(client);
-
-      return {token, client};
-    }
+      return { token, client };
+    },
   }
 
 

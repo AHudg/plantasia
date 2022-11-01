@@ -1,4 +1,5 @@
 const { gql } = require("apollo-server-express");
+const { signToken } = require('../utils/Authentication');
 
 const typeDefs = gql`
   type Client {
@@ -24,6 +25,11 @@ const typeDefs = gql`
     vendor: Vendor!
   }
 
+  type Auth {
+    token: ID!
+    client: Client
+  }
+
   type Query {
     clients: [Client]
     client(username: String!): Client
@@ -33,9 +39,9 @@ const typeDefs = gql`
   }
 
   type Mutation{
-    login(email: String!, password: String!): Client
-    addClient(username: String! email: String!, shopname: String! password: String!): Client
-    addVendor(username: String! email: String!, password: String! ): Vendor
+    login(email: String!, password: String!): Auth
+    addClient(username: String! email: String!, shopname: String! password: String!): Auth
+    addVendor(username: String! email: String!, password: String!): Vendor
   }
 `;
 
