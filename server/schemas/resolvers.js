@@ -4,11 +4,12 @@ const resolvers = {
   Query: {
     // used to query all clients - used to populate vendor's client list
     clients: async () => {
-      return Client.find({});
+      return Client.find({})
     },
     // used to query specific client - used for vendor clicking on his client's profile from client list
     client: async (parent, { username }) => {
-      return Client.findOne({ username });
+      return Client.findOne({ username })
+       
     },
     // used to query all vendors - used for clients to look at all potential vendors
     vendors: async () => {
@@ -23,6 +24,19 @@ const resolvers = {
       return Item.find();
     },
   },
+  Mutation: {
+    addClient: async (parent, args) => {
+      const client = await Client.create(args);
+
+      return client; 
+    },
+
+    login: async () => {
+
+    }
+  }
+
+
 };
 
 module.exports = resolvers;

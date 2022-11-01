@@ -7,6 +7,12 @@ const clientSchema = new Schema({
     unique: true,
     trim: true,
   },
+  shopname: {
+    type: String, 
+    require: true, 
+    unique: true,
+    trim: true,
+  },
   email: {
     type: String,
     require: true,
@@ -25,18 +31,18 @@ const clientSchema = new Schema({
   phone: {
     type: Number,
   },
-  //   vendorList: [
-  //     {
-  //       type: Schema.Types.ObjectId,
-  //       ref: "Vendor",
-  //     },
-  //   ],
-  //   past: [
-  //     {
-  //       type: Schema.Types.ObjectId,
-  //       ref: "Item",
-  //     },
-  //   ],
+    vendorList: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Vendor",
+      },
+    ],
+    past: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Item",
+      },
+    ],
 });
 
 const Client = model("Client", clientSchema);

@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Client {
     _id: ID
     username: String!
+    shopname: String!
     email: String!
   }
 
@@ -29,6 +30,11 @@ const typeDefs = gql`
     vendors: [Vendor]
     vendor(username: String!): Vendor
     inventory: [Item]
+  }
+
+  type Mutation{
+    login(email: String!, password: String!): Client
+    addClient(username: String! email: String!, shopname: String! password: String!): Client
   }
 `;
 

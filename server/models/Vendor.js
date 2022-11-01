@@ -25,18 +25,18 @@ const vendorSchema = new Schema({
   phone: {
     type: Number,
   },
-  // clientList: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Client",
-  //   },
-  // ],
-  // inventory: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Item",
-  //   },
-  // ],
+  clientList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Client",
+    },
+  ],
+  inventory: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 });
 
 const Vendor = model("Vendor", vendorSchema);
