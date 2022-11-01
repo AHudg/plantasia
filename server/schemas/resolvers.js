@@ -41,22 +41,38 @@ const resolvers = {
       return vendor; 
     },
 
-    // TODO: 
-    login: async (parent, { email, password }) => {
+    
+    loginClient: async (parent, { email, password }) => {
       const client = await Client.findOne({ email });
 
       if (!client) {
         throw new AuthenticationError('Incorrect credentials');
-      }
+      };
 
       const correctPassword = await client.isCorrectPassword(password);
 
       if (!correctPassword) {
         throw new AuthenticationError('Incorrect credentials');
-      }
+      };
 
       const token = signToken(client);
       return { token, client };
+    },
+    loginVendor: async (parent, { email, password }) => {
+      const vendor = await Vendor.findOne({ email });
+
+      if (!vendor) {
+        throw new AuthenticationError('Incorrect credentials');
+      };
+
+      const correctPassword = await vendor.isCorrectPassword(password);
+
+      if (!correctPassword) {
+        throw new AuthenticationError('Incorrect credentials');
+      };
+
+      const token = signToken(vendor);
+      return { token, vendor };
     },
   }
 
