@@ -77,8 +77,8 @@ const resolvers = {
     },
 
     addItem: async (parent, args, context) => {
-      console.log('args',args)
-      console.log('user logged on',context.user)
+      console.log('args', args)
+      console.log('user logged on', context.user)
       if (context.user) {
         const item = await Item.create(
           { ...args, vendor: context.user._id })
@@ -95,10 +95,25 @@ const resolvers = {
         
         return item;
       }
+    },
+      addVendToClient: async (parent, { vendorId }, context) => {
+        console.log(vendorId);
+  
+        if (context.user) {
+          const updateVendorList = await Client.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { vendorList: vendorId } },
+            { new: true }
+          ).populate("vendorList");
+  
+          console.log(updateVendorList);
+  
+          return updateVendorList;
+        }
+        throw new AuthenticationError("You need to be logged in!");
+    },
       
-    }
   }
 }
-
 
 module.exports = resolvers;

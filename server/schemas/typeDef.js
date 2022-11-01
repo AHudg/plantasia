@@ -3,14 +3,15 @@ const { signToken } = require("../utils/Authentication");
 
 const typeDefs = gql`
   type Client {
-    _id: ID
+    _id: ID!
     username: String!
     shopName: String!
     email: String!
+    vendorList: [Vendor]
   }
 
   type Vendor {
-    _id: ID
+    _id: ID!
     username: String!
     email: String!
     shopName: String!
@@ -38,7 +39,6 @@ const typeDefs = gql`
     token: ID!
     vendor: Vendor
   }
-
 
   type Query {
     clients: [Client]
@@ -68,6 +68,7 @@ const typeDefs = gql`
       stock: Int!
       price: Int!
     ) : Item
+    addVendToClient(vendorId: ID!): Client
   }
 
 `;

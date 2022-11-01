@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const clientSchema = new Schema({
   username: {
@@ -9,8 +9,8 @@ const clientSchema = new Schema({
     trim: true,
   },
   shopName: {
-    type: String, 
-    require: true, 
+    type: String,
+    require: true,
     unique: true,
     trim: true,
   },
@@ -18,12 +18,12 @@ const clientSchema = new Schema({
     type: String,
     require: true,
     unique: true,
-   match: [/.+@.+\..+/, 'Must match an email address!']
+    match: [/.+@.+\..+/, "Must match an email address!"],
   },
   password: {
     type: String,
     require: true,
-    minlength: 8
+    minlength: 8,
   },
   description: {
     type: String,
@@ -32,22 +32,22 @@ const clientSchema = new Schema({
   phone: {
     type: Number,
   },
-    vendorList: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Vendor",
-      },
-    ],
-    past: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Item",
-      },
-    ],
+  vendorList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Vendor",
+    },
+  ],
+  past: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 });
 
-clientSchema.pre('save', async function(next) {
-  if (this.isNew || this.isModified('password')) {
+clientSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -55,11 +55,9 @@ clientSchema.pre('save', async function(next) {
   next();
 });
 
-
-clientSchema.methods.isCorrectPassword = async function(password) {
+clientSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
-
 
 const Client = model("Client", clientSchema);
 

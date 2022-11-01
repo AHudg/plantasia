@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const vendorSchema = new Schema({
   username: {
@@ -44,8 +44,8 @@ const vendorSchema = new Schema({
   ],
 });
 
-vendorSchema.pre('save', async function(next) {
-  if (this.isNew || this.isModified('password')) {
+vendorSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -53,8 +53,7 @@ vendorSchema.pre('save', async function(next) {
   next();
 });
 
-
-vendorSchema.methods.isCorrectPassword = async function(password) {
+vendorSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
