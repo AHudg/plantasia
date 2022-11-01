@@ -2,25 +2,25 @@
   {
     "username": "Meg Thomas",
     "email": "quickandquiet@dbd.com",
-    "shopname": "Blood Points",
+    "shopName": "Blood Points",
     "password": "trytosurvive"
   },
   {
     "username": "Jonah Vasquez",
     "email": "correctiveaction@dbd.com",
-    "shopname": "Steam",
+    "shopName": "Steam",
     "password": "trytosurvive"
   },
   {
     "username": "Elodie Rakoto",
     "email": "deception@dbd.com",
-    "shopname": "I have no clue",
+    "shopName": "I have no clue",
     "password": "trytosurvive"
   },
   {
     "username": "Dwight Fairfield",
     "email": "provethyself@dbd.com",
-    "shopname": "we sell shoes",
+    "shopName": "we sell shoes",
     "password": "trytosurvive"
   }
 ]

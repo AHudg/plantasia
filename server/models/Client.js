@@ -8,7 +8,7 @@ const clientSchema = new Schema({
     unique: true,
     trim: true,
   },
-  shopname: {
+  shopName: {
     type: String, 
     require: true, 
     unique: true,

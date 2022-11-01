@@ -5,7 +5,7 @@ const typeDefs = gql`
   type Client {
     _id: ID
     username: String!
-    shopname: String!
+    shopName: String!
     email: String!
   }
 
@@ -13,7 +13,7 @@ const typeDefs = gql`
     _id: ID
     username: String!
     email: String!
-    shopname: String!
+    shopName: String!
     description: String
     phone: Int
     clientList: [Client]
@@ -47,10 +47,10 @@ const typeDefs = gql`
     addClient(
       username: String!
       email: String!
-      shopname: String!
+      shopName: String!
       password: String!
     ): Auth
-    addVendor(username: String!, email: String!, password: String!): Vendor
+    addVendor(username: String! email: String! shopName:String! password: String!): Auth
   }
 `;
 

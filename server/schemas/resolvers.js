@@ -36,8 +36,9 @@ const resolvers = {
     },
     addVendor: async (parent, args) => {
       const vendor = await Vendor.create(args);
+      const vendorToken = signToken(vendor)
 
-      return vendor;
+      return { vendorToken,vendor};
     },
 
     loginClient: async (parent, { email, password }) => {
