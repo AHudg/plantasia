@@ -30,6 +30,11 @@ const resolvers = {
 
       return client; 
     },
+    addVendor: async (parent, args) => {
+      const vendor = await Vendor.create(args);
+
+      return vendor; 
+    },
 
     login: async () => {
 
