@@ -10,10 +10,19 @@ const pastOrderSchema = new Schema(
             default: Date.now,
             get: timestamp => dateformat(timestamp)
         },
-        username: {
+        clientName: {
             type: String,
-            required: true
-        }
+            ref: 'Client'
+        },
+        vendorName: {
+            type: String,
+            ref: 'Vendor'
+        },
+        // TODO: will this get me quantity, price etc?
+        items: {
+            type: Schema.Types.ObjectId,
+            ref: 'Items'
+        },
     },
     {
         toJSON: {

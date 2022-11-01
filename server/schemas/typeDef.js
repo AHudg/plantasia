@@ -22,7 +22,7 @@ const typeDefs = gql`
     name: String!
     stock: Int!
     price: Float!
-    vendor: Vendor!
+    vendor: [Vendor]
   }
 
   type Auth {
