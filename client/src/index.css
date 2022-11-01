@@ -1,7 +1,12 @@
 :root {
   --primary: white;
+  --primary5: rgba(255, 255, 255, 0.5);
+  --secondary: black;
   --blue: rgb(47, 86, 230);
+  --blue5: rgba(47, 86, 230, 0.5);
+  --blue25: rgba(47, 86, 230, 0.25);
   --orange: rgb(241, 164, 17);
+  --orange5: rgb(239, 192, 105);
 }
 
 body {
@@ -27,6 +32,10 @@ ul {
 
 p {
   color: var(--primary);
+}
+
+.noMargin {
+  margin: 0;
 }
 
 /* header/navigation */
@@ -91,6 +100,67 @@ a:link {
 .userContact {
   font-size: 12px;
   font-style: italic;
+}
+
+/* vendor search list */
+.searchLabel {
+  color: var(--primary);
+}
+
+.searchInput {
+  color: var(--orange);
+  border-radius: 10px;
+  background-color: var(--secondary);
+}
+
+.magBtn {
+  color: var(--primary);
+  position: relative;
+  left: -40px;
+}
+
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.vendorTitle {
+  margin: 0 30px;
+  padding: 10px;
+  background-color: var(--blue5);
+  color: var(--primary);
+}
+
+.vendorItems {
+  background-color: var(--blue25);
+}
+
+.listBg {
+  background-color: var(--primary5);
+}
+
+.shopName {
+  padding-top: 10px;
+  color: var(--blue);
+}
+
+.shopName:hover {
+  color: var(--orange);
+}
+
+.vendorName {
+  font-size: 15px;
+}
+
+.clientNumber {
+  font-size: 15px;
+}
+
+.createdAt {
+  font-size: 10px;
 }
 
 /* footer */

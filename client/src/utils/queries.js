@@ -9,3 +9,13 @@ export const QUERY_CLIENTS = gql`
     }
   }
 `;
+
+export const QUERY_VENDORS = gql`
+  query vendors {
+    vendors {
+      _id
+      username
+      email
+    }
+  }
+`;
