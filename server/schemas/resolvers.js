@@ -73,6 +73,22 @@ const resolvers = {
       const token = signToken(vendor);
       return { token, vendor };
     },
+    addVendToClient: async (parent, { vendorId }, context) => {
+      console.log(vendorId);
+
+      if (context.user) {
+        const updateVendorList = await Client.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { vendorList: vendorId } },
+          { new: true }
+        ).populate("vendorList");
+
+        console.log(updateVendorList);
+
+        return updateVendorList;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 
