@@ -7,7 +7,10 @@ import Auth from "../utils/auth";
 export default function Login() {
   const [user, setCurrentUser] = useState("Client");
 
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({
+  username: "",
+  password: "",
+ });
 
   const [loginClient] = useMutation(LOGIN_CLIENT);
   const [loginVendor] = useMutation(LOGIN_VENDOR);
@@ -24,6 +27,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (user === 'Client') {
       try {
         const { data } = await loginClient({
@@ -45,8 +49,7 @@ export default function Login() {
       }
     }
   };
-
-
+  
   return (
     <main>
       <img
@@ -91,6 +94,7 @@ export default function Login() {
               name="email"
               type="email"
               id="email"
+              value={formState.email}
               onChange={handleChange}
             ></input>
           </div>
@@ -102,6 +106,7 @@ export default function Login() {
               name="password"
               type="password"
               id="password"
+              value={formState.password}
               onChange={handleChange}
             ></input>
           </div>
