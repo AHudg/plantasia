@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 
 import Auth from '../../utils/auth';
 // TODO need conditional navigation for client/vendor and no nav for login/signup

@@ -12,7 +12,7 @@ const Profile = () => {
   const { data, loading } = useQuery(
     Auth.getProfile().data.type === "Client" ? QUERY_CLIENTME : QUERY_VENDORME
   );
-
+  console.log(data);
   if (loading) {
     return <div>Loading...</div>;
   }
