@@ -13,6 +13,7 @@ const resolvers = {
           .populate('friends');
         return clientData;
       }
+      throw new AuthenticationError('Not logged in');
     },
     vendorMe: async (parent, args, context) => {
       if (context.vendor) {
@@ -122,6 +123,7 @@ const resolvers = {
         );
         return item;
       }
+      throw new AuthenticationError('Not logged in');
     },
     // TODO: Old add to friends type code. 
     //   addVendToClient: async (parent, { vendorId }, context) => {
@@ -163,6 +165,7 @@ const resolvers = {
         )
         return updateFriendship;
       }
+      throw new AuthenticationError('Not logged in');
       
     },
     // client is adding vendor as friend
@@ -188,6 +191,7 @@ const resolvers = {
         )
         return updateFriendship;
       }
+      throw new AuthenticationError('Not logged in');
     },
     
     acceptFriendReq: async (parent, { friendship }, context) => {
@@ -198,6 +202,7 @@ const resolvers = {
          { new: true }
        );
      }
+     throw new AuthenticationError('Not logged in');
     },
     deleteFriendReq: async (parent, { friendship }, context) => {
       if (context.user) {
@@ -205,6 +210,7 @@ const resolvers = {
           { _id: friendship }
         );
       }
+      throw new AuthenticationError('Not logged in');
    }
    
   }
