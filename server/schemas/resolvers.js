@@ -159,6 +159,23 @@ const resolvers = {
       }
     },
 
+    deleteClient: async (parent, args, context) => {
+      if (context.user) {
+        await Client.findByIdAndDelete(
+          { _id: context.user._id },
+          // TODO what else should go here
+        )
+      }
+    },
+    deleteVendor: async (parent, args, context) => {
+      if (context.user) {
+        await Vendor.findByIdAndDelete(
+          { _id: context.user._id },
+          // TODO what else should go here
+        )
+      }
+    },
+
     addItem: async (parent, args, context) => {
       if (context.user) {
         const item = await Item.create({ ...args, vendor: context.user._id });

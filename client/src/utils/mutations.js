@@ -143,3 +143,20 @@ export const EDIT_VENDOR = gql`
     }
   }
 `;
+
+export const DELETE_CLIENT = gql`
+mutation deleteClient {
+  deleteClient {
+    _id
+  }
+}
+`;
+
+export const DELETE_VENDOR = gql`
+mutation deleteVendor {
+  deleteVendor {
+    _id
+  }
+}
+`;
+

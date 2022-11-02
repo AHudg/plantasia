@@ -99,6 +99,9 @@ const typeDefs = gql`
     editClient(shopName: String!, description: String, phone: String): Client
     editVendor(shopName: String!, description: String, phone: String): Vendor
 
+    deleteClient: [Client]
+    deleteVendor: [Vendor]
+
     addClientFriend(client: String!): Friend
     addVendorFriend(vendor: String!): Friend
 
