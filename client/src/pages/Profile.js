@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import UserInfo from "../components/UserInfo";
 import UserList from "../components/List/UserList";
@@ -10,20 +10,24 @@ import Auth from '../utils/auth';
 
 
 const Profile = () => {
-  const [screenSize, setScreenSize] = useState(getScreenSize());
+  // const [screenSize, setScreenSize] = useState(getScreenSize());
 
-  useEffect(() => {
-    function handleScreenResize() {
-      setScreenSize(getScreenSize());
-    }
-    window.addEventListener("resize", handleScreenResize);
+  // useEffect(() => {
+  //   function handleScreenResize() {
+  //     setScreenSize(getScreenSize());
+  //   }
+  //   window.addEventListener("resize", handleScreenResize);
 
-    return () => {
-      window.removeEventListener("resize", handleScreenResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleScreenResize);
+  //   };
+  // }, []);
 
+<<<<<<< HEAD
   const { data, loading } = useQuery(Auth.getProfile().data.type === 'Client' ? QUERY_CLIENTME : QUERY_VENDORME);
+=======
+  const { data, loading } = useQuery(Auth.getProfile().data.type === 'Client' ? QUERY_CLIENTME : QUERY_VENDORME )
+>>>>>>> feature/stuff
 
   if (loading) {
     return <div>Loading...</div>
@@ -43,37 +47,44 @@ const Profile = () => {
   //   );
   // }
 
-  function getScreenSize() {
-    return window.innerWidth;
-  }
+  // function getScreenSize() {
+  //   return window.innerWidth;
+  // }
 
-  const renderAddOns = () => {
-    console.log(screenSize);
-    if (screenSize > 768) {
-      return (
-        <div className="row m-0">
-          <div className="col-6">
-            <UserList></UserList>
-          </div>
-          <div className="col-6">
-            <PastList></PastList>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <span>Vendor List</span>
-          <span>Past Orders</span>
-        </div>
-      );
-    }
-  };
+  // const renderAddOns = () => {
+  //   console.log(screenSize);
+  //   if (screenSize > 768) {
+  //     return (
+        // <div className="row m-0">
+        //   <div className="col-6">
+        //     <UserList></UserList>
+        //   </div>
+        //   <div className="col-6">
+        //     <PastList></PastList>
+        //   </div>
+        // </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div>
+  //         <span>Vendor List</span>
+  //         <span>Past Orders</span>
+  //       </div>
+  //     );
+  //   }
+  // };
 
   return (
     <main>
       <UserInfo userData={userData}></UserInfo>
-      {renderAddOns()}
+      <div className="row m-0">
+          <div className="col-12 col-md-6">
+            <UserList></UserList>
+          </div>
+          <div className="col-12 col-md-6">
+            <PastList></PastList>
+          </div>
+        </div>
     </main>
   );
 };

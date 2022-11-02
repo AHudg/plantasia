@@ -10,7 +10,7 @@ export default function Navigation() {
           </a>
         </li>
         <li className="col-4">
-          <a className="navLink" href="/vendors">
+          <a className="navLink" href="/search">
             Dashboard
           </a>
         </li>

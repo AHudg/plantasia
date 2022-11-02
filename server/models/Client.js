@@ -29,9 +29,12 @@ const clientSchema = new Schema({
   description: {
     type: String,
     trim: true,
+    require: true,
+    default: 'This user has no description.'
   },
   phone: {
     type: Number,
+    default: ''
   },
   friend: [
     {

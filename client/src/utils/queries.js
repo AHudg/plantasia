@@ -32,7 +32,6 @@ export const QUERY_CLIENTS = gql`
     clients {
       _id
       username
-      email
     }
   }
 `;
@@ -79,7 +78,6 @@ export const QUERY_VENDORS = gql`
     vendors {
       _id
       username
-      email
     }
   }
 `;

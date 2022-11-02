@@ -1,11 +1,11 @@
 import React from "react";
 
 import { useQuery } from "@apollo/client";
-import { QUERY_CLIENTS, QUERY_VENDORS } from "../../utils/queries";
+import { QUERY_CLIENT} from "../../utils/queries";
 
 export default function UserList() {
   // user useQuery hook to make query request
-  const { loading, data } = useQuery(QUERY_CLIENTS);
+  const { loading, data } = useQuery(QUERY_CLIENT);
 
   const clients = data?.clients || [];
 

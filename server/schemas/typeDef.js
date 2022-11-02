@@ -7,6 +7,8 @@ const typeDefs = gql`
     username: String!
     shopName: String!
     email: String!
+    description: String
+    phone: Int!
     friend: [Friend]
   }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // ApolloProvider is a React component that is used to provide data to all other components
@@ -19,7 +19,8 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
-import Search from "./pages/VendorSearch";
+import Search from "./pages/Search";
+import SingleUser from './pages/SingleUser';
 import Settings from "./pages/Settings";
 import NoMatch from "./pages/NoMatch";
 
@@ -64,7 +65,9 @@ function App() {
                 element={<SignUp ></SignUp>}
               />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/vendors" element={<Search />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/user/:type/:username" element={<SingleUser />} />
+              {/* <Route path="/:client/:username" element={<SingleUser />} /> */}
               <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NoMatch />} />
             </Routes>

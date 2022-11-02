@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function UserInfo(props) {
-  const { userData } = props;
+// profile renders when props are in {}
+export default function UserInfo({ userData }) {
   return (
     <section className="row justify-content-center text-center mx-0">
       <img
@@ -12,13 +12,11 @@ export default function UserInfo(props) {
       <div className="col-10 my-3 row">
         <h2 className="col-12 username">{`${userData.username}`}</h2>
         <p className="col-12 description">
-          I am a small town ma and pa bed and breakfast. I have a small
-          inventory for sale mostly comprised of candles, soaps, and handcrafted
-          trinkets.
+        {`${userData.description}`}
         </p>
-        <p className="col-12 my-1 userContact">Phone: (555) 555-5555</p>
+        <p className="col-12 my-1 userContact">Phone: {`${userData.phone}`}</p>
         <p className="col-12 my-0 userContact">
-          Email: themiddleagedwitch@gmail.com
+          Email: {`${userData.email}`}
         </p>
       </div>
     </section>

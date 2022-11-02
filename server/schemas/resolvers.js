@@ -25,6 +25,11 @@ const resolvers = {
         return vendorData;
       }
     },
+    // friends: async (parent, args, contect) => {
+    //   if (context.user) {
+    //     const friendData = await Friend.find()
+    //   }
+    // }
     // used to query all clients - used to populate vendor's client list
     clients: async () => {
       return Client.find({}).populate('friend');
