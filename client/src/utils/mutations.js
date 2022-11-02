@@ -12,9 +12,21 @@ export const LOGIN_CLIENT = gql`
   }
 `;
 
+export const LOGIN_VENDOR = gql`
+  mutation loginVendor($email: String!, $password: String!) {
+    loginVendor(email: $email, password: $password) {
+      token
+      vendor {
+        _id
+        username
+      }
+    }
+  }
+`;
+
 // export const LOGIN_VENDOR = gql``;
 
-export const ADD_CLIENT = gql`
+export const SIGNUP_CLIENT = gql`
 mutation ($username: String!, $email: String!, $shopName: String!, $password: String!) {
     addClient(username: $username, email: $email, shopName: $shopName, password: $password) {
       token

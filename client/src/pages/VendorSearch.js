@@ -15,7 +15,7 @@ const Vendor = (props) => {
       <div className="col-12 row justify-content-center align-items-center mb-3">
         <label className="col-3 searchLabel">Search: </label>
         <input className="col-7 searchInput" type="search" id="searchQuery" />
-        <i class="col-1 fa-solid fa-magnifying-glass magBtn"></i>
+        <i className="col-1 fa-solid fa-magnifying-glass magBtn"></i>
       </div>
       <h2 className="col-11 vendorTitle">Vendor List</h2>
       <ul className="col-11 row justify-content-center px-0 pb-4 vendorItems">

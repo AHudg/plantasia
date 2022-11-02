@@ -1,12 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN_CLIENT, LOGIN_VENDOR } from "../utils/mutations";
+
+import Auth from "../utils/auth";
 
 export default function Login(props) {
   const { user, setCurrentUser } = props;
 
-  // TODO form handlers can go here
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [formState, setFormState] = useState({ email: '', password: '' });
+
+  const [loginClient] = useMutation(LOGIN_CLIENT);
+  const [loginVendor] = useMutation(LOGIN_VENDOR);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    // does this take the formState using "..." as the rest operator and replace [name]: original w/ [name]: value because [name] matches?
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (user === 'Client') {
+      try {
+        const { data } = await loginClient({
+          variables: { ...formState }
+        });
+
+        Auth.login(data.loginClient.token);
+      } catch (e) {
+        console.log(e);
+      }
+    } else if (user === 'Vendor') {
+      try {
+        const { data } = await loginVendor({
+          variable: { ...formState }
+        });
+        Auth.login(data.loginVendor.token);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
 
   return (
     <main>
@@ -52,7 +91,7 @@ export default function Login(props) {
               name="email"
               type="email"
               id="email"
-              // value, and onChange can be added here
+              onChange={handleChange}
             ></input>
           </div>
           <div className="col-12 my-2 row">
@@ -63,7 +102,7 @@ export default function Login(props) {
               name="password"
               type="password"
               id="password"
-              // value, and onChange can be added here
+              onChange={handleChange}
             ></input>
           </div>
           <button className="col-4 my-2" type="submit">
