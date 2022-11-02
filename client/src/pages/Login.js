@@ -41,7 +41,7 @@ export default function Login() {
     } else if (user === 'Vendor') {
       try {
         const { data } = await loginVendor({
-          variable: { ...formState }
+          variables: { ...formState }
         });
         Auth.login(data.loginVendor.token);
       } catch (e) {

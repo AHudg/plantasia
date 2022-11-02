@@ -123,7 +123,7 @@ const resolvers = {
       if (!correctPassword) {
         throw new AuthenticationError("Incorrect credentials");
       }
-      vendor.type='Vendor'
+      vendor.type = "Vendor";
       const token = signToken(vendor);
       return { token, vendor };
     },
