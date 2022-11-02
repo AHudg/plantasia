@@ -89,11 +89,8 @@ export const LOGIN_CLIENT = gql`
 `;
 
 export const LOGIN_VENDOR = gql`
-  mutation loginVendor(
-    $loginVendorEmail3: String!
-    $loginVendorPassword3: String!
-  ) {
-    loginVendor(email: $loginVendorEmail3, password: $loginVendorPassword3) {
+  mutation loginVendor($email: String!, $password: String!) {
+    loginVendor(email: $email, password: $password) {
       token
       vendor {
         _id
