@@ -33,10 +33,11 @@ export default function SignUp(props) {
 
     if (user === "Client") {
       try {
+        // why do I have to call this data????
         const { data } = await addClient({
           variables: { ...formState }
         });
-        
+
         Auth.login(data.addClient.token);
       } catch (e) {
         console.log(e);
@@ -47,7 +48,7 @@ export default function SignUp(props) {
         const { data } = await addVendor({
           variables: { ...formState }
         });
-        console.log(data)
+
         Auth.login(data.addVendor.token);
       } catch (e) {
         console.log(e);
