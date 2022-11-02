@@ -1,0 +1,291 @@
+:root {
+  --primary: white;
+  --primary5: rgba(255, 255, 255, 0.5);
+  --secondary: black;
+  --blue: rgb(47, 86, 230);
+  --blue5: rgba(47, 86, 230, 0.5);
+  --blue25: rgba(47, 86, 230, 0.25);
+  --orange: rgb(241, 164, 17);
+  --orange5: rgb(239, 192, 105);
+}
+
+body {
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("../public/images/background.png");
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+ul {
+  list-style: none;
+}
+
+p {
+  color: var(--primary);
+}
+
+label {
+  color: var(--primary);
+}
+
+input {
+  border-radius: 10px;
+}
+
+.noMargin {
+  margin: 0;
+}
+
+/* header/navigation */
+.logo {
+  width: 60px;
+  margin-top: 15px;
+  transition: 0.5s;
+}
+
+.logo:hover {
+  width: 75px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.navLink {
+  color: var(--primary);
+}
+
+.navLink:hover {
+  color: var(--orange);
+}
+
+/* landing page */
+.landingImage {
+  width: 100%;
+  position: relative;
+  z-index: -1;
+}
+
+.landingText {
+  font-style: italic;
+  font-weight: 300;
+  position: relative;
+}
+
+.landingLink {
+  margin-bottom: 150px;
+  position: relative;
+}
+
+/* login/signup */
+.loginImage {
+  width: 100%;
+  position: absolute;
+  top: 40px;
+  z-index: -1;
+}
+
+.activeClient {
+  color: var(--orange);
+  font-size: large;
+  font-weight: bold;
+  border-bottom: solid var(--primary) 2px;
+}
+
+.activeVendor {
+  color: var(--blue);
+  font-size: large;
+  font-weight: bold;
+  border-bottom: solid var(--primary) 2px;
+}
+
+.loginForm {
+  position: relative;
+  top: 30px;
+}
+
+.loginTitle {
+  color: var(--primary);
+  text-align: center;
+  position: relative;
+  top: 30px;
+}
+
+.switch {
+  font-weight: bolder;
+  color: var(--primary);
+}
+
+.switch:hover {
+  font-weight: bolder;
+  color: var(--blue);
+  filter: drop-shadow(3px 3px 10px var(--primary));
+}
+
+/* profile page */
+.userImage {
+  width: 100px;
+  border-radius: 25px;
+}
+
+.shopname {
+  color: var(--orange);
+  font-size: 25px;
+}
+
+.username {
+  font-size: 15px;
+  color: var(--primary);
+}
+
+.description {
+  font-size: 16px;
+}
+
+.userContact {
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* vendor search list */
+.searchInput {
+  color: var(--orange);
+  border-radius: 10px;
+  background-color: var(--secondary);
+}
+
+.magBtn {
+  color: var(--primary);
+  position: relative;
+  left: -40px;
+}
+
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.vendorTitle {
+  margin: 0 30px;
+  padding: 10px;
+  background-color: var(--blue5);
+  color: var(--primary);
+}
+
+.vendorItems {
+  background-color: var(--blue25);
+}
+
+.listBg {
+  background-color: var(--primary5);
+}
+
+.shopName {
+  padding-top: 10px;
+  color: var(--blue);
+}
+
+.shopName:hover {
+  color: var(--orange);
+}
+
+.vendorName {
+  font-size: 15px;
+}
+
+/* SingleUser */
+.addFriend {
+  background-color: var(--primary5);
+  padding: 5px;
+  border-radius: 15px;
+}
+
+/* footer */
+.contact {
+  font-size: 13px;
+  margin-bottom: 10px;
+  border-top: var(--orange) solid 1px;
+  border-bottom: var(--orange) solid 1px;
+}
+
+.emblem {
+  height: 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .landingImage {
+    top: -50px;
+  }
+
+  .landingText {
+    top: -90px;
+  }
+
+  .landingLink {
+    top: -90px;
+    margin-bottom: 0;
+  }
+
+  .emblem {
+    height: 20%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .landingImage {
+    top: -120px;
+  }
+
+  .landingText {
+    top: -180px;
+  }
+
+  .landingLink {
+    top: -180px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .landingImage {
+    top: -120px;
+  }
+
+  .landingText {
+    top: -280px;
+  }
+
+  .landingLink {
+    top: -280px;
+  }
+
+  .loginImage {
+    top: 80px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .landingImage {
+    top: -200px;
+  }
+
+  .landingText {
+    top: -350px;
+  }
+
+  .landingLink {
+    top: -350px;
+  }
+}

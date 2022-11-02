@@ -1,0 +1,44 @@
+[
+  {
+    "username": "The Nightmare",
+    "email": "nightmare@dbd.com",
+    "password": "4kills5gens",
+    "shopName": "Boosteroid",
+    "description": "Don't sleep on Elm Street.",
+    "phone": "1234567890",
+    "clientList": [],
+    "inventory": []
+  },
+  {
+    "username": "The Onryo",
+    "email": "samara@dbd.com",
+    "password": "4kills5gens",
+    "shopName": "Boosteroid",
+    "description": "The Ring. Wells. TVs. Oh my!",
+    "phone": "1234567890",
+    "clientList": [],
+    "inventory": []
+  },
+  {
+    "username": "The Nurse",
+    "email": "blink@dbd.com",
+    "password": "4kills5gens",
+    "shopName": "Boosteroid",
+    "description": "Chain blinking is exhausting.",
+    "phone": "1234567890",
+    "clientList": [],
+    "inventory": []
+  },
+  {
+    "username": "The Executioner",
+    "email": "silenthill@dbd.com",
+    "password": "4kills5gens",
+    "shopName": "Boosteroid",
+    "description": "Queue the sirens.",
+    "phone": "1234567890",
+    "clientList": [],
+    "inventory": [
+     
+    ]
+  }
+]

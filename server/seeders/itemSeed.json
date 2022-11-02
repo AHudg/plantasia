@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ToolKit",
+    "stock": 5,
+    "price": 9.99,
+    "username": "The Nightmare"
+  },
+  {
+    "name": "Flashlight",
+    "stock": 10,
+    "price": 15.99,
+    "username": "The Onryo"
+  },
+  {
+    "name": "Medkit",
+    "stock": 15,
+    "price": 25.99,
+    "username": "The Nurse"
+  }
+]
