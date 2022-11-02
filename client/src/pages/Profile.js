@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_CLIENTME, QUERY_VENDORME } from '../utils/queries';
 import Auth from '../utils/auth';
 
+
 const Profile = () => {
   const [screenSize, setScreenSize] = useState(getScreenSize());
 
@@ -22,7 +23,7 @@ const Profile = () => {
     };
   }, []);
 
-  const { data, loading} = useQuery(Auth.getProfile().data.type === 'Client' ? QUERY_CLIENTME : QUERY_VENDORME )
+  const { data, loading } = useQuery(Auth.getProfile().data.type === 'Client' ? QUERY_CLIENTME : QUERY_VENDORME);
 
   if (loading) {
     return <div>Loading...</div>
@@ -30,14 +31,17 @@ const Profile = () => {
 
   const userData = data?.clientMe || data?.vendorMe || {};
 
-  if (!userData.username) {
-    return (
-      <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
-      </h4>
-    );
-  }
+ 
+  
+
+  // if () {
+  //   return (
+  //     <h4>
+  //       You need to be logged in to see this. Use the navigation links above to
+  //       sign up or log in!
+  //     </h4>
+  //   );
+  // }
 
   function getScreenSize() {
     return window.innerWidth;

@@ -6,7 +6,7 @@ export default function UserInfo(props) {
     <section className="row justify-content-center text-center mx-0">
       <img
         src="./images/blueProfile.png"
-        alt="Placeholder profile image of company logo."
+        alt="Company logo placeholder."
         className="col-10 userImage"
       ></img>
       <div className="col-10 my-3 row">
