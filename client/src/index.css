@@ -38,6 +38,10 @@ label {
   color: var(--primary);
 }
 
+input {
+  border-radius: 10px;
+}
+
 .noMargin {
   margin: 0;
 }
@@ -117,15 +121,31 @@ a:link {
   top: 30px;
 }
 
+.switch {
+  font-weight: bolder;
+  color: var(--primary);
+}
+
+.switch:hover {
+  font-weight: bolder;
+  color: var(--blue);
+  filter: drop-shadow(3px 3px 10px var(--primary));
+}
+
 /* profile page */
 .userImage {
   width: 100px;
   border-radius: 25px;
 }
 
-.username {
+.shopname {
   color: var(--orange);
   font-size: 25px;
+}
+
+.username {
+  font-size: 15px;
+  color: var(--primary);
 }
 
 .description {
@@ -133,7 +153,7 @@ a:link {
 }
 
 .userContact {
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic;
 }
 
@@ -207,15 +227,15 @@ input[type="search"]::-webkit-search-results-decoration {
 
 @media screen and (min-width: 768px) {
   .landingImage {
-    top: -30px;
+    top: -50px;
   }
 
   .landingText {
-    top: -75px;
+    top: -90px;
   }
 
   .landingLink {
-    top: -75px;
+    top: -90px;
     margin-bottom: 0;
   }
 
@@ -226,14 +246,46 @@ input[type="search"]::-webkit-search-results-decoration {
 
 @media screen and (min-width: 992px) {
   .landingImage {
-    top: -90px;
+    top: -120px;
   }
 
   .landingText {
-    top: -150px;
+    top: -180px;
   }
 
   .landingLink {
-    top: -150px;
+    top: -180px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .landingImage {
+    top: -120px;
+  }
+
+  .landingText {
+    top: -280px;
+  }
+
+  .landingLink {
+    top: -280px;
+  }
+
+  .loginImage {
+    top: 80px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .landingImage {
+    top: -200px;
+  }
+
+  .landingText {
+    top: -350px;
+  }
+
+  .landingLink {
+    top: -350px;
   }
 }

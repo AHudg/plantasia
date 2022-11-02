@@ -48,7 +48,7 @@ const Search = () => {
         <input className="col-7 searchInput" type="search" id="searchQuery" />
         <i className="col-1 fa-solid fa-magnifying-glass magBtn"></i>
       </div>
-      <h2 className="col-11 vendorTitle">{userType()} List</h2>
+      <h2 className="col-11 vendorTitle">{userType()} Search</h2>
       <ul className="col-11 row justify-content-center px-0 pb-4 vendorItems">
         {userData.map((user) => (
           <li className="col-11 mt-4 listBg" key={user.username}>

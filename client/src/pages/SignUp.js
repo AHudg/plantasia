@@ -94,8 +94,8 @@ export default function SignUp() {
               Vendor
             </p>
           </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Username: </label>
+          <div className="col-12 col-md-10 col-lg-9 my-2 row">
+            <label className="col-2 text-end">Username: </label>
             <input
               className="col-8"
               placeholder="Username"
@@ -106,8 +106,8 @@ export default function SignUp() {
               onChange={handleChange}
             ></input>
           </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Password: </label>
+          <div className="col-12 col-md-10 col-lg-9 my-2 row">
+            <label className="col-2 text-end">Password: </label>
             <input
               className="col-8"
               name="password"
@@ -118,8 +118,8 @@ export default function SignUp() {
               onChange={handleChange}
             ></input>
           </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Shop Name: </label>
+          <div className="col-12 col-md-10 col-lg-9 my-2 row">
+            <label className="col-2 text-end">Shop Name: </label>
             <input
               className="col-8"
               placeholder="Shop Name"
@@ -130,8 +130,8 @@ export default function SignUp() {
               onChange={handleChange}
             ></input>
           </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Description: </label>
+          <div className="col-12 col-md-10 col-lg-9 my-2 row">
+            <label className="col-2 text-end">Description: </label>
             <input
               className="col-8"
               placeholder="Short Description About Your Shop"
@@ -142,8 +142,8 @@ export default function SignUp() {
               onChange={handleChange}
             ></input>
           </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Phone: </label>
+          <div className="col-12 col-md-10 col-lg-9 my-2 row">
+            <label className="col-2 text-end">Phone: </label>
             <input
               className="col-8"
               placeholder="Phone Number"
@@ -154,8 +154,8 @@ export default function SignUp() {
               onChange={handleChange}
             ></input>
           </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Email: </label>
+          <div className="col-12 col-md-10 col-lg-9 my-2 row">
+            <label className="col-2 text-end">Email: </label>
             <input
               className="col-8"
               placeholder="Email Address"
@@ -172,7 +172,7 @@ export default function SignUp() {
           <div className="col-11 text-center my-3">
             <p>
               If you are already a member of our community, please log in{" "}
-              <a className="" href="/login">
+              <a className="switch" href="/login">
                 here
               </a>
               .
