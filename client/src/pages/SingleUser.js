@@ -23,16 +23,17 @@ export default function SingleUser() {
 
   const userData = data?.client || data?.vendor || {};
 
-  // if (!userData.friend) {
-  // } else {
-  //   const friendData = userData.friend;
-  //   for (let i = 0; i < friendData.length; i++) {
-  //     if (friendData[i].client === account) {
-  //       setFriendStatus(true);
-  //     }
-  //     console.log(friendData[i].client, account);
-  //   }
-  // }
+  if (!userData.friend) {
+  } else {
+    const friendData = userData.friend;
+    console.log(friendData);
+    for (let i = 0; i < friendData.length; i++) {
+      if (friendData[i].client === account) {
+        setFriendStatus(true);
+      }
+      console.log(friendData[i].client, account);
+    }
+  }
 
   if (loading) {
     return <div>Loading...</div>;
