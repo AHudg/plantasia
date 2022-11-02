@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
-import UserInfo from "../components/UserInfo/";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_CLIENTME, QUERY_VENDORME } from "../utils/queries";
 import { EDIT_CLIENT, EDIT_VENDOR, DELETE_CLIENT,DELETE_VENDOR } from "../utils/mutations";

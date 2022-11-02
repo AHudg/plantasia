@@ -1,5 +1,6 @@
 [
   {
+    "_id": "1",
     "name": "ToolKit",
     "stock": 5,
     "price": 9.99,
@@ -9,12 +10,12 @@
     "name": "Flashlight",
     "stock": 10,
     "price": 15.99,
-    "username": "The Nightmare"
+    "username": "The Onryo"
   },
   {
     "name": "Medkit",
     "stock": 15,
     "price": 25.99,
-    "username": "The Nightmare"
+    "username": "The Nurse"
   }
 ]
