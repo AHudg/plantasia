@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function Profile() {
+export default function UserInfo(props) {
+  const { userData } = props;
   return (
     <section className="row justify-content-center text-center mx-0">
       <img
@@ -9,7 +10,7 @@ export default function Profile() {
         className="col-10 userImage"
       ></img>
       <div className="col-10 my-3 row">
-        <h2 className="col-12 username">TheMiddleAgedWitch</h2>
+        <h2 className="col-12 username">{`${userData.username}`}</h2>
         <p className="col-12 description">
           I am a small town ma and pa bed and breakfast. I have a small
           inventory for sale mostly comprised of candles, soaps, and handcrafted

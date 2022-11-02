@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-import UserInfo from "../components/User Info";
+import UserInfo from "../components/UserInfo";
 import UserList from "../components/List/UserList";
 import PastList from "../components/Sidebars/PastOrderList";
 
-const Profile = (props) => {
-  const [screenSize, setScreenSize] = useState(getScreenSize());
+import { useQuery } from '@apollo/client';
+import { QUERY_CLIENTME } from '../utils/queries';
 
-  function getScreenSize() {
-    return window.innerWidth;
-  }
+const Profile = ({ user }) => {
+  const [screenSize, setScreenSize] = useState(getScreenSize());
 
   useEffect(() => {
     function handleScreenResize() {
@@ -21,6 +20,19 @@ const Profile = (props) => {
       window.removeEventListener("resize", handleScreenResize);
     };
   }, []);
+
+  const { data, loading} = useQuery(QUERY_CLIENTME)
+
+  if (loading) {
+    return <div>Loadin...</div>
+  }
+
+  const userData = data?.clientMe || {};
+  console.log(data)
+
+  function getScreenSize() {
+    return window.innerWidth;
+  }
 
   const renderAddOns = () => {
     console.log(screenSize);
@@ -47,7 +59,7 @@ const Profile = (props) => {
 
   return (
     <main>
-      <UserInfo></UserInfo>
+      <UserInfo userData={userData}></UserInfo>
       {renderAddOns()}
     </main>
   );
