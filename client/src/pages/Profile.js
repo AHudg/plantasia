@@ -18,7 +18,7 @@ const Profile = () => {
   }
 
   const userData = data?.clientMe || data?.vendorMe || {};
-  console.log(userData)
+
   return (
     <main>
       <UserInfo userData={userData}></UserInfo>

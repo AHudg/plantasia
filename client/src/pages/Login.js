@@ -7,7 +7,7 @@ import Auth from "../utils/auth";
 export default function Login() {
   const [user, setCurrentUser] = useState("Client");
 
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
 
   const [loginClient] = useMutation(LOGIN_CLIENT);
   const [loginVendor] = useMutation(LOGIN_VENDOR);
@@ -24,28 +24,29 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (user === 'Client') {
+    if (user === "Client") {
       try {
         const { data } = await loginClient({
-          variables: { ...formState }
+          variables: { ...formState },
         });
 
         Auth.login(data.loginClient.token);
       } catch (e) {
         console.log(e);
       }
-    } else if (user === 'Vendor') {
+    } else if (user === "Vendor") {
+      console.log(user);
       try {
         const { data } = await loginVendor({
-          variable: { ...formState }
+          variable: { ...formState },
         });
+
         Auth.login(data.loginVendor.token);
       } catch (e) {
         console.log(e);
       }
     }
   };
-
 
   return (
     <main>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import UserInfo from "../components/UserInfo/";
 import { useQuery, useMutation } from "@apollo/client";
@@ -7,7 +7,6 @@ import { QUERY_CLIENTME, QUERY_VENDORME } from "../utils/queries";
 import { EDIT_CLIENT, EDIT_VENDOR } from "../utils/mutations";
 
 const Settings = () => {
-
   const [edit, setEdit] = useState(false);
 
   const userType = Auth.getProfile().data.type;
@@ -24,8 +23,6 @@ const Settings = () => {
 
   const [editClient] = useMutation(EDIT_CLIENT);
   const [editVendor] = useMutation(EDIT_VENDOR);
-
-  const navigate = useNavigate();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -74,7 +71,6 @@ const Settings = () => {
   };
 
   const handleEdit = () => {
-    
     // upon login, edit = false, so only a button appears asking if you'd like to edit
     if (!edit) {
       return <div></div>;
