@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 // ApolloProvider is a React component that is used to provide data to all other components
 // ApolloClient is a constructor function that will help initialize the connecttion to the GraphQL API server
 // InMemoryCache enables Apollo Client instance to cache API response data to perform request efficiently
@@ -9,7 +11,8 @@ import {
   InMemoryCache,
   createHttpLink,
 } from "@apollo/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { setContext } from '@apollo/client/link/context'
 
 import Header from "./components/Header";
 import Landing from "./pages/Landing";
@@ -25,9 +28,19 @@ const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    }
+  };
+});
+
 // create instance and connection to API endpoint
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
@@ -50,7 +63,7 @@ function App() {
                 path="/signup"
                 element={<SignUp user={user} setCurrentUser={setCurrentUser} ></SignUp>}
               />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<Profile user={user} />} />
               <Route path="/vendors" element={<Search />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NoMatch />} />

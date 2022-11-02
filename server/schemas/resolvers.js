@@ -7,18 +7,19 @@ const { AuthenticationError } = require("apollo-server-express");
 const resolvers = {
   Query: {
     clientMe: async (parent, args, context) => {
-      if (context.client) {
+      console.log(context.user)
+      if (context.user) {
         const clientData = await Client.findOne({ _id: context.user._id })
           .select('-__v -password')
-          .populate('friends');
+          .populate('friend');
         return clientData;
       }
     },
     vendorMe: async (parent, args, context) => {
-      if (context.vendor) {
+      if (context.user) {
         const vendorData = await Vendor.findOne({ _id: context.user._id })
           .select('-__v -password')
-          .populate('friends');
+          .populate('friend');
   
         return vendorData;
       }
@@ -30,8 +31,8 @@ const resolvers = {
     // used to query specific client - used for vendor clicking on his client's profile from client list
     client: async (parent, { username }) => {
       return Client.findOne({ username })
+        .select('-_v -password')
         .populate('friend')
-        
     },
 
 
@@ -44,7 +45,10 @@ const resolvers = {
     },
     // used to query one vendor - used by clients that click on specific vendor profile and access inventory
     vendor: async (parent, { username }) => {
-      return Vendor.findOne({ username }).populate('friend').populate('client').populate('inventory')
+      return Vendor.findOne({ username })
+      .select('-_v -password')
+      .populate('friend')
+      .populate('inventory')
       ;
     },
     // used to query all items at the moment - somehow needs to search by vendor id to return their inventory
