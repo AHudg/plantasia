@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import UserInfo from '../components/UserInfo/'
 import { useQuery } from '@apollo/client';
-import { QUERY_CLIENTME, QUERY_VENDORME } from '../utils/queries';
+import { QUERY_CLIENTME, QUERY_VENDORME , UPDATE_VENDOR, UPDATE_CLIENT} from '../utils/queries';
 
 const Settings = () => {
   const [edit, setEdit] = useState(false);
@@ -20,6 +20,10 @@ const Settings = () => {
     event.preventDefault();
     Auth.logout();
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+  }
 
   const handleEdit = () => {
     if (!edit) {
@@ -32,7 +36,6 @@ const Settings = () => {
     } else {
       return (
         <section className="row justify-content-center text-center mx-0">
-        <button onClick={() => { setEdit(false) }} > EDIT PROFILE </button>
         <img
           src="./images/blueProfile.png"
           alt="Company logo placeholder."
@@ -40,27 +43,27 @@ const Settings = () => {
         ></img>
           <div className="col-10 my-3 row">
             <label className="col-12 col-sm-3 text-sm-end"
-            for='username'>
+            >
               Username:
             </label>
             <input className="col-12 username" type="text" name="username" id="username">
             </input>
-            <label className="col-12 description" for="description">
+            <label className="col-12 description" >
               Description:
             </label>
             <input className="col-12 description" type="text" name="description" id="description">
             </input>
-            <label className="col-12 my-1 userContact" for="phone">
+            <label className="col-12 my-1 userContact" >
               Phone:
             </label>
             <input className="col-12 my-1 userContact" type="text" name="phone" id="phone">
             </input>
-            <label className="ccol-12 my-0 userContact" for="email">
+            <label className="col-12 my-0 userContact" >
               Email:
             </label>
-            <input className="ccol-12 my-0 userContact" type="text" name="email" id="email">
+            <input className="col-12 my-0 userContact" type="text" name="email" id="email">
             </input>
-            <button onClick={() => { setEdit(false) }} > EDIT PROFILE </button>
+            <button type='submit'> SAVE </button>
         </div>
       </section>
     )};
