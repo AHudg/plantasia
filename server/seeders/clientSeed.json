@@ -2,25 +2,33 @@
   {
     "username": "Meg Thomas",
     "email": "quickandquiet@dbd.com",
-    "shopName": "Blood Points",
-    "password": "trytosurvive"
+    "shopName": "Blood Web",
+    "password": "trytosurvive",
+    "phone": "7138675309",
+    "description":"Watch out for the Entity, and happy shopping!"
   },
   {
     "username": "Jonah Vasquez",
     "email": "correctiveaction@dbd.com",
-    "shopName": "Steam",
-    "password": "trytosurvive"
+    "shopName": "Skill Checks",
+    "password": "trytosurvive",
+    "phone": "6789998212",
+    "description":"Don't Mess Up or They'll get you! Succeed and get great rewards"
   },
   {
     "username": "Elodie Rakoto",
     "email": "deception@dbd.com",
-    "shopName": "I have no clue",
-    "password": "trytosurvive"
+    "shopName": "Shrine of Secrets",
+    "password": "trytosurvive",
+    "phone":"8772274669",
+    "description":"High End store, that allows you to skip the line where others won't."
   },
   {
     "username": "Dwight Fairfield",
     "email": "provethyself@dbd.com",
-    "shopName": "we sell shoes",
-    "password": "trytosurvive"
+    "shopName": "Energy Rift",
+    "password": "trytosurvive",
+    "phone":"18002738255",
+    "description":"Come here for a nice boost, and better lighting."
   }
 ]

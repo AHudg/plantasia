@@ -7,7 +7,9 @@
     "description": "Don't sleep on Elm Street.",
     "phone": "1234567890",
     "clientList": [],
-    "inventory": []
+    "inventory": [
+      
+    ]
   },
   {
     "username": "The Onryo",
@@ -37,6 +39,8 @@
     "description": "Queue the sirens.",
     "phone": "1234567890",
     "clientList": [],
-    "inventory": []
+    "inventory": [
+     
+    ]
   }
 ]
