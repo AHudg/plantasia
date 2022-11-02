@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const ADD_CLIENT = gql`
-mutation AddClient($username: String!, $password: String!, $shopName: String!, $phone: String!, $email: String!) {
-  addClient(username: $username, password: $password, shopName: $shopName, phone: $phone, email: $email) {
+mutation AddClient($username: String!, $password: String!, $shopName: String!, $phone: String!, $email: String!, $description: String) {
+  addClient(username: $username, password: $password, shopName: $shopName, phone: $phone, email: $email, description: $description) {
     token
     client {
       _id
@@ -19,8 +19,8 @@ mutation AddClient($username: String!, $password: String!, $shopName: String!, $
 }`;
 
 export const ADD_VENDOR = gql`
-mutation addVendor($username: String!, $password: String!, $shopName: String!, $phone: String!, $email: String!) {
-  addVendor(username: $username, password: $password, shopName: $shopName, phone: $phone, email: $email) {
+mutation addVendor($username: String!, $password: String!, $shopName: String!, $phone: String!, $email: String!, $description: String) {
+  addVendor(username: $username, password: $password, shopName: $shopName, phone: $phone, email: $email, description: $description) {
     token
     vendor {
       _id
