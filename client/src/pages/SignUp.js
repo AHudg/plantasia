@@ -32,23 +32,23 @@ export default function SignUp(props) {
 
     if (user === "Client") {
       try {
-        const { token, client } = await addClient({
+        // why do I have to call this data????
+        const { data } = await addClient({
           variables: { ...formState }
         });
-        console.log(token, client);
 
-        // Auth.login(client.addClient.token);
+        Auth.login(data.addClient.token);
       } catch (e) {
         console.log(e);
       }
 
     } else if (user === 'Vendor') {
       try {
-        const { token, vendor } = await addVendor({
+        const { vendor } = await addVendor({
           variables: { ...formState }
         });
-        console.log(token, vendor)
 
+        // Auth.login(vendor)
       } catch (e) {
         console.log(e);
       }
