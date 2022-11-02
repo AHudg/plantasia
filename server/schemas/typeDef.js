@@ -56,6 +56,8 @@ const typeDefs = gql`
   }
 
   type Query {
+    clientMe: Client
+    vendorMe: Vendor
     clients: [Client]
     client(username: String!): Client
     vendors: [Vendor]

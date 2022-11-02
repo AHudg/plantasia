@@ -6,6 +6,24 @@ const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
   Query: {
+    clientMe: async (parent, args, context) => {
+      if (context.client) {
+        const clientData = await Client.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('friends');
+        return clientData;
+      }
+    },
+    vendorMe: async (parent, args, context) => {
+      if (context.vendor) {
+        const vendorData = await Vendor.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('thoughts')
+          .populate('friends');
+  
+        return vendorData;
+      }
+    },
     // used to query all clients - used to populate vendor's client list
     clients: async () => {
       return Client.find({}).populate('friend');
