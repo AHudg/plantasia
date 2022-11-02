@@ -7,6 +7,7 @@ import { QUERY_CLIENTME, QUERY_VENDORME } from "../utils/queries";
 import { EDIT_CLIENT, EDIT_VENDOR } from "../utils/mutations";
 
 const Settings = () => {
+
   const [edit, setEdit] = useState(false);
 
   const userType = Auth.getProfile().data.type;
@@ -73,6 +74,7 @@ const Settings = () => {
   };
 
   const handleEdit = () => {
+    
     // upon login, edit = false, so only a button appears asking if you'd like to edit
     if (!edit) {
       return <div></div>;
