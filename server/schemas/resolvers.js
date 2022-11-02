@@ -111,6 +111,7 @@ const resolvers = {
       const token = signToken(client);
       return { token, client };
     },
+
     loginVendor: async (parent, { email, password }) => {
       const vendor = await Vendor.findOne({ email });
 
@@ -126,6 +127,21 @@ const resolvers = {
       vendor.type = "Vendor";
       const token = signToken(vendor);
       return { token, vendor };
+    },
+
+    editClient: async (parent, args, context) => {
+      if (context.user) {
+        const newClient = await Client.findByIdAndUpdate(
+          { _id: context.user._id },
+          {
+            shopName: args.shopName,
+            description: args.description,
+            phone: args.phone,
+          },
+          { new: true }
+        );
+        return newClient;
+      }
     },
 
     editVendor: async (parent, args, context) => {
