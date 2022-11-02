@@ -1,6 +1,6 @@
 const { Client, Vendor, Item, Ordered, Friend } = require("../models");
 
-const { signToken } = require("../utils/Authentication");
+const { signToken } = require("../utils/authentication");
 // authetication error if username or password is wrong
 const { AuthenticationError } = require("apollo-server-express");
 const { findByIdAndUpdate } = require("../models/Ordered");
@@ -162,17 +162,17 @@ const resolvers = {
     deleteClient: async (parent, args, context) => {
       if (context.user) {
         await Client.findByIdAndDelete(
-          { _id: context.user._id },
+          { _id: context.user._id }
           // TODO what else should go here
-        )
+        );
       }
     },
     deleteVendor: async (parent, args, context) => {
       if (context.user) {
         await Vendor.findByIdAndDelete(
-          { _id: context.user._id },
+          { _id: context.user._id }
           // TODO what else should go here
-        )
+        );
       }
     },
 
