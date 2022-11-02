@@ -45,7 +45,7 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [user, setCurrentUser] = useState("Client");
+  // const [user, setCurrentUser] = useState("Client");
 
   return (
     <ApolloProvider client={client}>
@@ -57,13 +57,13 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route
                 path="/login"
-                element={<Login user={user} setCurrentUser={setCurrentUser}></Login>}
+                element={<Login ></Login>}
               />
               <Route
                 path="/signup"
-                element={<SignUp user={user} setCurrentUser={setCurrentUser} ></SignUp>}
+                element={<SignUp ></SignUp>}
               />
-              <Route path="/profile" element={<Profile user={user} />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/vendors" element={<Search />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NoMatch />} />

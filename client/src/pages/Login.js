@@ -4,8 +4,8 @@ import { LOGIN_CLIENT, LOGIN_VENDOR } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
-export default function Login(props) {
-  const { user, setCurrentUser } = props;
+export default function Login() {
+  const [user, setCurrentUser] = useState("Client");
 
   const [formState, setFormState] = useState({ email: '', password: '' });
 

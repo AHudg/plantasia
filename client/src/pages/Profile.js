@@ -5,9 +5,10 @@ import UserList from "../components/List/UserList";
 import PastList from "../components/Sidebars/PastOrderList";
 
 import { useQuery } from '@apollo/client';
-import { QUERY_CLIENTME } from '../utils/queries';
+import { QUERY_CLIENTME, QUERY_VENDORME } from '../utils/queries';
+import Auth from '../utils/auth';
 
-const Profile = ({ user }) => {
+const Profile = () => {
   const [screenSize, setScreenSize] = useState(getScreenSize());
 
   useEffect(() => {
@@ -21,14 +22,22 @@ const Profile = ({ user }) => {
     };
   }, []);
 
-  const { data, loading} = useQuery(QUERY_CLIENTME)
+  const { data, loading} = useQuery(Auth.getProfile().data.type === 'Client' ? QUERY_CLIENTME : QUERY_VENDORME )
 
   if (loading) {
-    return <div>Loadin...</div>
+    return <div>Loading...</div>
   }
 
-  const userData = data?.clientMe || {};
-  console.log(data)
+  const userData = data?.clientMe || data?.vendorMe || {};
+
+  if (!userData.username) {
+    return (
+      <h4>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+    );
+  }
 
   function getScreenSize() {
     return window.innerWidth;

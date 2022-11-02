@@ -5,9 +5,9 @@ import { SIGNUP_CLIENT, SIGNUP_VENDOR } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
-export default function SignUp(props) {
-  const { user, setCurrentUser } = props;
- 
+// export default function SignUp({ user, setCurrentUser}) {
+  export default function SignUp() {
+  const [user, setCurrentUser] = useState("Client");
 
   const [formState, setFormState] = useState({
     username: "",

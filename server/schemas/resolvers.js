@@ -70,12 +70,14 @@ const resolvers = {
   Mutation: {
     addClient: async (parent, args) => {
       const client = await Client.create(args);
+      client.type = 'Client';
       const token = signToken(client);
 
       return { token, client };
     },
     addVendor: async (parent, args) => {
       const vendor = await Vendor.create(args);
+      vendor.type = 'Vendor';
       const token = signToken(vendor);
 
       return { token, vendor };
