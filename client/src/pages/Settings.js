@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import UserInfo from "../components/UserInfo/";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_CLIENTME, QUERY_VENDORME } from "../utils/queries";
-import { EDIT_CLIENT, EDIT_VENDOR } from "../utils/mutations";
+import { EDIT_CLIENT, EDIT_VENDOR, DELETE_CLIENT,DELETE_VENDOR } from "../utils/mutations";
 
 const Settings = () => {
-
   const [edit, setEdit] = useState(false);
 
   const userType = Auth.getProfile().data.type;
@@ -24,8 +23,8 @@ const Settings = () => {
 
   const [editClient] = useMutation(EDIT_CLIENT);
   const [editVendor] = useMutation(EDIT_VENDOR);
-
-  const navigate = useNavigate();
+  const [deleteClient] = useMutation(DELETE_CLIENT);
+  const [deleteVendor] = useMutation(DELETE_VENDOR);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -37,6 +36,29 @@ const Settings = () => {
     event.preventDefault();
     Auth.logout();
   };
+  const deleteAccount = async (e) => {
+    e.preventDefault();
+    if (userType === "Client") {
+      try {
+        await deleteClient({
+         
+        })
+        Auth.logout();
+      } catch (e) {
+        console.log(e);
+      }
+    } else if (userType === "Vendor") {
+      try {
+        await deleteVendor({
+         
+        });
+        Auth.logout();
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -74,7 +96,6 @@ const Settings = () => {
   };
 
   const handleEdit = () => {
-    
     // upon login, edit = false, so only a button appears asking if you'd like to edit
     if (!edit) {
       return <div></div>;
@@ -138,9 +159,14 @@ const Settings = () => {
           Edit Profile{" "}
         </p>{" "}
         {Auth.loggedIn() ? (
+          <div>
           <p className="" onClick={logout}>
             Logout
           </p>
+           <p className="" onClick={deleteAccount}>
+           Delete Account
+         </p>
+            </div>
         ) : (
           <Link to="/"></Link>
         )}
