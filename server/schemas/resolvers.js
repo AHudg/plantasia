@@ -107,7 +107,7 @@ const resolvers = {
       if (!correctPassword) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
+      client.type = "Client";
       const token = signToken(client);
       return { token, client };
     },
@@ -123,7 +123,7 @@ const resolvers = {
       if (!correctPassword) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
+      vendor.type='Vendor'
       const token = signToken(vendor);
       return { token, vendor };
     },

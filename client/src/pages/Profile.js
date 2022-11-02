@@ -9,6 +9,7 @@ import { QUERY_CLIENTME, QUERY_VENDORME } from "../utils/queries";
 import Auth from "../utils/auth";
 
 const Profile = () => {
+  console.log(Auth.getProfile().data.type)
   const { data, loading } = useQuery(
     Auth.getProfile().data.type === "Client" ? QUERY_CLIENTME : QUERY_VENDORME
   );

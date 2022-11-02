@@ -10,10 +10,7 @@ export default function Login() {
   const [formState, setFormState] = useState({
   username: "",
   password: "",
-  shopName: "",
-  description: "",
-  phone: "",
-  email: "",});
+ });
 
   const [loginClient] = useMutation(LOGIN_CLIENT);
   const [loginVendor] = useMutation(LOGIN_VENDOR);
@@ -30,6 +27,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (user === 'Client') {
       try {
         const { data } = await loginClient({
@@ -51,8 +49,7 @@ export default function Login() {
       }
     }
   };
-  console.log(formState);
-
+  
   return (
     <main>
       <img
