@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const Ordered = require('./Ordered');
+const Ordered = require("./Ordered");
 
 const clientSchema = new Schema({
   username: {
@@ -30,11 +30,11 @@ const clientSchema = new Schema({
     type: String,
     trim: true,
     require: true,
-    default: 'This user has no description.'
+    default: "This user has no description.",
   },
   phone: {
     type: Number,
-    default: ''
+    default: "",
   },
   friend: [
     {

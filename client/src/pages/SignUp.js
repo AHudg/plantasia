@@ -6,15 +6,18 @@ import { SIGNUP_CLIENT, SIGNUP_VENDOR } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 // export default function SignUp({ user, setCurrentUser}) {
-  export default function SignUp() {
+export default function SignUp() {
   const [user, setCurrentUser] = useState("Client");
 
   const [formState, setFormState] = useState({
     username: "",
-    email: "",
-    shopName: "",
     password: "",
+    shopName: "",
+    description: "",
+    phone: "",
+    email: "",
   });
+
   const [addClient] = useMutation(SIGNUP_CLIENT);
   const [addVendor] = useMutation(SIGNUP_VENDOR);
 
@@ -35,18 +38,17 @@ import Auth from "../utils/auth";
       try {
         // why do I have to call this data????
         const { data } = await addClient({
-          variables: { ...formState }
+          variables: { ...formState },
         });
 
         Auth.login(data.addClient.token);
       } catch (e) {
         console.log(e);
       }
-
-    } else if (user === 'Vendor') {
+    } else if (user === "Vendor") {
       try {
         const { data } = await addVendor({
-          variables: { ...formState }
+          variables: { ...formState },
         });
 
         Auth.login(data.addVendor.token);
@@ -105,6 +107,18 @@ import Auth from "../utils/auth";
             ></input>
           </div>
           <div className="col-12 my-2 row">
+            <label className="col-4 text-end">Password: </label>
+            <input
+              className="col-8"
+              name="password"
+              placeholder="********"
+              type="password"
+              id="password"
+              value={formState.password}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="col-12 my-2 row">
             <label className="col-4 text-end">Shop Name: </label>
             <input
               className="col-8"
@@ -117,25 +131,38 @@ import Auth from "../utils/auth";
             ></input>
           </div>
           <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Email: </label>
+            <label className="col-4 text-end">Description: </label>
             <input
               className="col-8"
-              placeholder="Email"
-              name="email"
-              type="email"
-              id="email"
-              value={formState.email}
+              placeholder="Short Description About Your Shop"
+              name="description"
+              type="text"
+              id="description"
+              value={formState.description}
               onChange={handleChange}
             ></input>
           </div>
           <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Password: </label>
+            <label className="col-4 text-end">Phone: </label>
             <input
               className="col-8"
-              name="password"
-              type="password"
-              id="password"
-              value={formState.password}
+              placeholder="Phone Number"
+              name="phone"
+              type="phone"
+              id="phone"
+              value={formState.phone}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="col-12 my-2 row">
+            <label className="col-4 text-end">Email: </label>
+            <input
+              className="col-8"
+              placeholder="Email Address"
+              name="email"
+              type="email"
+              id="email"
+              value={formState.email}
               onChange={handleChange}
             ></input>
           </div>

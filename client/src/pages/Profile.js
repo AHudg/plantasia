@@ -23,11 +23,7 @@ const Profile = () => {
   //   };
   // }, []);
 
-<<<<<<< HEAD
   const { data, loading } = useQuery(Auth.getProfile().data.type === 'Client' ? QUERY_CLIENTME : QUERY_VENDORME);
-=======
-  const { data, loading } = useQuery(Auth.getProfile().data.type === 'Client' ? QUERY_CLIENTME : QUERY_VENDORME )
->>>>>>> feature/stuff
 
   if (loading) {
     return <div>Loading...</div>
