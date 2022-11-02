@@ -18,7 +18,6 @@ const resolvers = {
       if (context.vendor) {
         const vendorData = await Vendor.findOne({ _id: context.user._id })
           .select('-__v -password')
-          .populate('thoughts')
           .populate('friends');
   
         return vendorData;
