@@ -11,6 +11,9 @@ export default function UserInfo({ userData }) {
       ></img>
       <div className="col-10 my-3 row">
         <h2 className="col-12 username">{`${userData.username}`}</h2>
+        <p className="col-12 shopname">
+        {`${userData.shopName}`}
+        </p>
         <p className="col-12 description">
         {`${userData.description}`}
         </p>
