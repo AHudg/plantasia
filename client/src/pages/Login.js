@@ -83,11 +83,11 @@ export default function Login() {
               Vendor
             </p>
           </div>
-          <div className="col-12 mb-1 row">
-            <label className="col-4 text-end">Email: </label>
+          <div className="col-12 col-md-10 col-lg-9 mb-1 row justify-content-center">
+            <label className="col-2 text-end">Email: </label>
             <input
               className="col-8"
-              placeholder="email"
+              placeholder="Email Address"
               name="email"
               type="email"
               id="email"
@@ -95,11 +95,11 @@ export default function Login() {
               onChange={handleChange}
             ></input>
           </div>
-          <div className="col-12 my-2 row">
-            <label className="col-4 text-end">Password: </label>
+          <div className="col-12 col-md-10 col-lg-9 my-2 row">
+            <label className="col-3 text-end">Password: </label>
             <input
               className="col-8"
-              placeholder="password"
+              placeholder="Password"
               name="password"
               type="password"
               id="password"
@@ -118,7 +118,7 @@ export default function Login() {
             <p>
               {" "}
               Click{" "}
-              <a className="" href="/signup">
+              <a className="switch" href="/signup">
                 here
               </a>{" "}
               to sign up now!
