@@ -6,6 +6,8 @@ export const QUERY_CLIENTME = gql`
       _id
       username
       shopName
+      phone
+      description
       email
       friend {
         _id
@@ -20,8 +22,8 @@ export const QUERY_VENDORME = gql`
       _id
       username
       email
-      description
       shopName
+      description
       phone
       friend {
         _id
