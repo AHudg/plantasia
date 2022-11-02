@@ -8,8 +8,7 @@ import UserInfo from "../components/UserInfo";
 import Auth from "../utils/auth";
 
 export default function SingleUser() {
-  const [match, setMatch] = useState(false);
-  console.log(match);
+  const [friendStatus, setFriendStatus] = useState(false);
 
   const { type, username } = useParams();
 
@@ -24,15 +23,16 @@ export default function SingleUser() {
 
   const userData = data?.client || data?.vendor || {};
 
-  if (userData.friend) {
-    const friendData = userData.friend;
-    for (let i = 0; i < friendData.length; i++) {
-      if (friendData[i].client === account) {
-        setMatch(true);
-      }
-      console.log(friendData[i].client, account);
-    }
-  }
+  // if (!userData.friend) {
+  // } else {
+  //   const friendData = userData.friend;
+  //   for (let i = 0; i < friendData.length; i++) {
+  //     if (friendData[i].client === account) {
+  //       setFriendStatus(true);
+  //     }
+  //     console.log(friendData[i].client, account);
+  //   }
+  // }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -44,9 +44,15 @@ export default function SingleUser() {
     }
   };
 
+  // useEffect for component mount, at inital mount (page load) check if friendData[i].client === account,
+  // if it does, then call a setAttribute function to set Add Friend Button's logic??
   return (
     <div className="row justify-content-end m-0">
-      <p className="col-2 m-3 text-center addFriend" onClick={() => {}}>
+      <p
+        className="col-2 m-3 text-center addFriend"
+        data-status={friendStatus}
+        onClick={() => {}}
+      >
         Add Friend
       </p>
       <div className="col-12 mt-5">
