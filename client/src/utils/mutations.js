@@ -1,5 +1,45 @@
 import { gql } from "@apollo/client";
 
+export const ADD_CLIENT = gql`
+  mutation (
+    $username: String!
+    $email: String!
+    $shopName: String!
+    $password: String!
+  ) {
+    addClient(
+      username: $username
+      email: $email
+      shopName: $shopName
+      password: $password
+    ) {
+      token
+    }
+  }
+`;
+
+export const ADD_VENDOR = gql`
+  mutation addVendor(
+    $username: String!
+    $shopName: String!
+    $password: String!
+    $description: String
+    $phone: String
+    $email: String!
+  ) {
+    addVendor(
+      username: $username
+      shopName: $shopName
+      password: $password
+      description: $description
+      phone: $phone
+      email: $email
+    ) {
+      token
+    }
+  }
+`;
+
 export const LOGIN_CLIENT = gql`
   mutation loginClient($email: String!, $password: String!) {
     loginClient(email: $email, password: $password) {
@@ -24,44 +64,36 @@ export const LOGIN_VENDOR = gql`
   }
 `;
 
-// export const LOGIN_VENDOR = gql``;
-
-export const SIGNUP_CLIENT = gql`
-  mutation (
-    $username: String!
-    $email: String!
+export const EDIT_CLIENT = gql`
+  mutation editClient(
     $shopName: String!
-    $password: String!
+    $description: String
+    $phone: String
   ) {
-    addClient(
-      username: $username
-      email: $email
-      shopName: $shopName
-      password: $password
-    ) {
-      token
+    editClient(shopName: $shopName, description: $description, phone: $phone) {
+      username
+      email
+      shopName
+      description
+      phone
+      _id
     }
   }
 `;
 
-export const SIGNUP_VENDOR = gql`
-  mutation addVendor(
-    $username: String!
+export const EDIT_VENDOR = gql`
+  mutation editVendor(
     $shopName: String!
-    $password: String!
     $description: String
     $phone: String
-    $email: String!
   ) {
-    addVendor(
-      username: $username
-      shopName: $shopName
-      password: $password
-      description: $description
-      phone: $phone
-      email: $email
-    ) {
-      token
+    editVendor(shopName: $shopName, description: $description, phone: $phone) {
+      username
+      email
+      shopName
+      description
+      phone
+      _id
     }
   }
 `;

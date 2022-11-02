@@ -1,21 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import UserInfo from "../components/UserInfo/";
-import { useQuery } from "@apollo/client";
-import {
-  QUERY_CLIENTME,
-  QUERY_VENDORME,
-  UPDATE_VENDOR,
-  UPDATE_CLIENT,
-} from "../utils/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_CLIENTME, QUERY_VENDORME } from "../utils/queries";
+import { EDIT_CLIENT, EDIT_VENDOR } from "../utils/mutations";
 
 const Settings = () => {
   const [edit, setEdit] = useState(false);
 
+  const userType = Auth.getProfile().data.type;
+
+  const [formState, setFormState] = useState({
+    shopName: "",
+    description: "",
+    phone: "",
+  });
+
   const { data, loading } = useQuery(
-    Auth.getProfile().data.type === "Client" ? QUERY_CLIENTME : QUERY_VENDORME
+    userType === "Client" ? QUERY_CLIENTME : QUERY_VENDORME
   );
+
+  const [editClient] = useMutation(EDIT_CLIENT);
+  const [editVendor] = useMutation(EDIT_VENDOR);
+
+  const navigate = useNavigate();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -28,8 +37,39 @@ const Settings = () => {
     Auth.logout();
   };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    // does this take the formState using "..." as the rest operator and replace [name]: original w/ [name]: value because [name] matches?
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (userType === "Client") {
+      try {
+        // why do I have to call this data????
+        const { data } = await editClient({
+          variables: { ...formState },
+        });
+        setEdit(false);
+      } catch (e) {
+        console.log(e);
+      }
+    } else if (userType === "Vendor") {
+      try {
+        const { data } = await editVendor({
+          variables: { ...formState },
+        });
+        setEdit(false);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   const handleEdit = () => {
@@ -39,21 +79,20 @@ const Settings = () => {
       // when button clicked, edit = true, so the fields populate on the screen
     } else {
       return (
-        <section className="row justify-content-center text-center mx-0">
+        <form
+          className="row justify-content-center text-center mx-0"
+          onSubmit={handleSubmit}
+        >
           <div className="col-10 my-3 row justify-content-center text-end">
-            <label className="col-12 col-sm-3 my-3">Username:</label>
-            <input
-              className="col-12 col-sm-8 my-3"
-              type="text"
-              name="username"
-              id="username"
-            ></input>
             <label className="col-12 col-sm-3 my-3">Shop Name:</label>
             <input
               className="col-12 col-sm-8 my-3"
               type="text"
               name="shopName"
               id="shopName"
+              placeholder={userData.shopName}
+              value={formState.shopName}
+              onChange={handleChange}
             ></input>
             <label className="col-12 col-sm-3 my-3">Description:</label>
             <input
@@ -61,6 +100,9 @@ const Settings = () => {
               type="text"
               name="description"
               id="description"
+              placeholder={userData.description}
+              value={formState.description}
+              onChange={handleChange}
             ></input>
             <label className="col-12 col-sm-3 my-3">Phone:</label>
             <input
@@ -68,19 +110,15 @@ const Settings = () => {
               type="text"
               name="phone"
               id="phone"
-            ></input>
-            <label className="col-12 col-sm-3 my-3">Email:</label>
-            <input
-              className="col-12 col-sm-8 my-3"
-              type="text"
-              name="email"
-              id="email"
+              placeholder={userData.phone}
+              value={formState.phone}
+              onChange={handleChange}
             ></input>
             <button type="submit" className="col-5 my-4">
               Save
             </button>
           </div>
-        </section>
+        </form>
       );
     }
   };

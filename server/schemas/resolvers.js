@@ -3,25 +3,26 @@ const { Client, Vendor, Item, Ordered, Friend } = require("../models");
 const { signToken } = require("../utils/Authentication");
 // authetication error if username or password is wrong
 const { AuthenticationError } = require("apollo-server-express");
+const { findByIdAndUpdate } = require("../models/Ordered");
 
 const resolvers = {
   Query: {
     clientMe: async (parent, args, context) => {
-      console.log(context.user)
+      console.log(context.user);
       if (context.user) {
         const clientData = await Client.findOne({ _id: context.user._id })
-          .select('-__v -password')
-          .populate('friend');
+          .select("-__v -password")
+          .populate("friend");
         return clientData;
       }
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
     vendorMe: async (parent, args, context) => {
       if (context.user) {
         const vendorData = await Vendor.findOne({ _id: context.user._id })
-          .select('-__v -password')
-          .populate('friend');
-  
+          .select("-__v -password")
+          .populate("friend");
+
         return vendorData;
       }
     },
@@ -32,30 +33,25 @@ const resolvers = {
     // }
     // used to query all clients - used to populate vendor's client list
     clients: async () => {
-      return Client.find({}).populate('friend');
+      return Client.find({}).populate("friend");
     },
     // used to query specific client - used for vendor clicking on his client's profile from client list
     client: async (parent, { username }) => {
       return Client.findOne({ username })
-        .select('-_v -password')
-        .populate('friend')
+        .select("-_v -password")
+        .populate("friend");
     },
-
 
     // used to query all vendors - used for clients to look at all potential vendors
     vendors: async () => {
-      return Vendor.find()
-        .populate('inventory')
-        .populate('friend')
-        
+      return Vendor.find().populate("inventory").populate("friend");
     },
     // used to query one vendor - used by clients that click on specific vendor profile and access inventory
     vendor: async (parent, { username }) => {
       return Vendor.findOne({ username })
-      .select('-_v -password')
-      .populate('friend')
-      .populate('inventory')
-      ;
+        .select("-_v -password")
+        .populate("friend")
+        .populate("inventory");
     },
     // used to query all items at the moment - somehow needs to search by vendor id to return their inventory
     items: async (parent, { username }) => {
@@ -68,21 +64,20 @@ const resolvers = {
     },
 
     friend: async () => {
-      return Friend.find({}).populate('client').populate('vendor')
-    }
-  
+      return Friend.find({}).populate("client").populate("vendor");
+    },
   },
   Mutation: {
     addClient: async (parent, args) => {
       const client = await Client.create(args);
-      client.type = 'Client';
+      client.type = "Client";
       const token = signToken(client);
 
       return { token, client };
     },
     addVendor: async (parent, args) => {
       const vendor = await Vendor.create(args);
-      vendor.type = 'Vendor';
+      vendor.type = "Vendor";
       const token = signToken(vendor);
 
       return { token, vendor };
@@ -121,12 +116,25 @@ const resolvers = {
       return { token, vendor };
     },
 
-    addItem: async (parent, args, context) => {
-     
+    editVendor: async (parent, args, context) => {
       if (context.user) {
-        const item = await Item.create(
-          { ...args, vendor: context.user._id })
-        
+        const newVendor = await Vendor.findByIdAndUpdate(
+          { _id: context.user._id },
+          {
+            shopName: args.shopName,
+            description: args.description,
+            phone: args.phone,
+          },
+          { new: true }
+        );
+        return newVendor;
+      }
+    },
+
+    addItem: async (parent, args, context) => {
+      if (context.user) {
+        const item = await Item.create({ ...args, vendor: context.user._id });
+
         await Vendor.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { inventory: item._id } },
@@ -134,33 +142,33 @@ const resolvers = {
         );
         return item;
       }
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
-    // TODO: Old add to friends type code. 
+    // TODO: Old add to friends type code.
     //   addVendToClient: async (parent, { vendorId }, context) => {
     //     console.log(vendorId);
-  
+
     //     if (context.user) {
     //       const updateVendorList = await Client.findByIdAndUpdate(
     //         { _id: context.user._id },
     //         { $addToSet: { vendorList: vendorId } },
     //         { new: true }
     //       ).populate("vendorList");
-  
+
     //       console.log(updateVendorList);
-  
+
     //       return updateVendorList;
     //     }
     //     throw new AuthenticationError("You need to be logged in!");
     // },
-    // Vendor is adding a client as friend 
+    // Vendor is adding a client as friend
     addClientFriend: async (parent, { client }, context) => {
       if (context.user) {
         const friendship = {
           client: client,
           vendor: context.user._id,
-          status: 2
-        }
+          status: 2,
+        };
         const updateFriendship = await Friend.create(friendship);
 
         await Vendor.findByIdAndUpdate(
@@ -173,11 +181,10 @@ const resolvers = {
           { _id: client },
           { $addToSet: { friend: updateFriendship._id } },
           { new: true }
-        )
+        );
         return updateFriendship;
       }
-      throw new AuthenticationError('Not logged in');
-      
+      throw new AuthenticationError("Not logged in");
     },
     // client is adding vendor as friend
     addVendorFriend: async (parent, { vendor }, context) => {
@@ -185,8 +192,8 @@ const resolvers = {
         const friendship = {
           client: context.user._id,
           vendor: vendor,
-          status: 1
-        }
+          status: 1,
+        };
         const updateFriendship = await Friend.create(friendship);
 
         await Client.findByIdAndUpdate(
@@ -199,32 +206,29 @@ const resolvers = {
           { _id: vendor },
           { $addToSet: { friend: updateFriendship._id } },
           { new: true }
-        )
+        );
         return updateFriendship;
       }
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
-    
+
     acceptFriendReq: async (parent, { friendship }, context) => {
-     if (context.user) {
-       return await Friend.findByIdAndUpdate(
-         { _id: friendship },
-         { status: 0 },
-         { new: true }
-       );
-     }
-     throw new AuthenticationError('Not logged in');
+      if (context.user) {
+        return await Friend.findByIdAndUpdate(
+          { _id: friendship },
+          { status: 0 },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("Not logged in");
     },
     deleteFriendReq: async (parent, { friendship }, context) => {
       if (context.user) {
-        return await Friend.findByIdAndDelete(
-          { _id: friendship }
-        );
+        return await Friend.findByIdAndDelete({ _id: friendship });
       }
-      throw new AuthenticationError('Not logged in');
-   }
-   
-  }
-}
+      throw new AuthenticationError("Not logged in");
+    },
+  },
+};
 
 module.exports = resolvers;

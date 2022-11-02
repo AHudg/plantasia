@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useMutation } from "@apollo/client";
-import { SIGNUP_CLIENT, SIGNUP_VENDOR } from "../utils/mutations";
+import { ADD_CLIENT, ADD_VENDOR } from "../utils/mutations";
 
 import Auth from "../utils/auth";
 
@@ -18,8 +18,8 @@ export default function SignUp() {
     email: "",
   });
 
-  const [addClient] = useMutation(SIGNUP_CLIENT);
-  const [addVendor] = useMutation(SIGNUP_VENDOR);
+  const [addClient] = useMutation(ADD_CLIENT);
+  const [addVendor] = useMutation(ADD_VENDOR);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
