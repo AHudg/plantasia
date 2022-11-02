@@ -1,5 +1,4 @@
 const { gql } = require("apollo-server-express");
-const { signToken } = require("../utils/Authentication");
 
 const typeDefs = gql`
   type Client {
