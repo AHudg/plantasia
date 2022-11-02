@@ -14,18 +14,24 @@ export const QUERY_CLIENTME = gql`
   }
 `;
 
-export const QUERY_CLIENT = gql`
-query client($username: String!) {
-  client(username: $username) {
-    _id
-    shopName
-    username
-    email
-    friend {
+export const QUERY_VENDORME = gql`
+  query vendorMe {
+    vendorMe {
       _id
+      username
+      email
+      description
+      shopName
+      phone
+      friend {
+        _id
+      }
+      inventory {
+        _id
+      }
     }
   }
-}`
+`;
 
 export const QUERY_CLIENTS = gql`
   query clients {
@@ -36,23 +42,33 @@ export const QUERY_CLIENTS = gql`
   }
 `;
 
-export const QUERY_VENDORME = gql`
-query vendorMe {
-  vendorMe {
-    _id
-    username
-    email
-    description
-    shopName
-    phone
-    friend {
+export const QUERY_VENDORS = gql`
+  query vendors {
+    vendors {
       _id
-    }
-    inventory {
-      _id
+      username
     }
   }
-}`
+`;
+
+export const QUERY_CLIENT = gql`
+  query client($username: String!) {
+    client(username: $username) {
+      _id
+      username
+      email
+      phone
+      shopName
+      description
+      friend {
+        _id
+        client
+        vendor
+        status
+      }
+    }
+  }
+`;
 
 export const QUERY_VENDOR = gql`
   query Vendor($username: String!) {
@@ -65,19 +81,13 @@ export const QUERY_VENDOR = gql`
       phone
       friend {
         _id
+        client
+        vendor
+        status
       }
       inventory {
         _id
       }
-    }
-  }
-`;
-
-export const QUERY_VENDORS = gql`
-  query vendors {
-    vendors {
-      _id
-      username
     }
   }
 `;

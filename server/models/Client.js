@@ -9,11 +9,10 @@ const clientSchema = new Schema({
     unique: true,
     trim: true,
   },
-  shopName: {
+  password: {
     type: String,
     require: true,
-    unique: true,
-    trim: true,
+    minlength: 8,
   },
   email: {
     type: String,
@@ -21,20 +20,21 @@ const clientSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, "Must match an email address!"],
   },
-  password: {
+  phone: {
+    type: Number,
+    default: "",
+  },
+  shopName: {
     type: String,
     require: true,
-    minlength: 8,
+    unique: true,
+    trim: true,
   },
   description: {
     type: String,
     trim: true,
     require: true,
     default: "This user has no description.",
-  },
-  phone: {
-    type: Number,
-    default: "",
   },
   friend: [
     {

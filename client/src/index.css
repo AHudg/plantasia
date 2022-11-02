@@ -186,12 +186,11 @@ input[type="search"]::-webkit-search-results-decoration {
   font-size: 15px;
 }
 
-.clientNumber {
-  font-size: 15px;
-}
-
-.createdAt {
-  font-size: 10px;
+/* SingleUser */
+.addFriend {
+  background-color: var(--primary5);
+  padding: 5px;
+  border-radius: 15px;
 }
 
 /* footer */

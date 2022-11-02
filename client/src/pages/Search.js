@@ -54,19 +54,15 @@ const Search = () => {
           <li className="col-11 mt-4 listBg" key={user.username}>
             <div className="row align-items-end">
               <h3
-                className="col-12 col-md-6 my-0 text-start shopName"
+                className="col-12 col-md-6 text-start shopName"
                 onClick={navigateUser}
               >
                 {user.username}
               </h3>
+              {/* <p className="col-3 noMargin">Add Friend</p> */}
+              {/* Add client count here if possible */}
               <p className="col-12 text-end col-md-6 vendorName noMargin">
                 Owned by {user.username}
-              </p>
-            </div>
-            <div className="row align-items-end">
-              <p className="col-4 col-md-4 clientNumber noMargin">54 clients</p>
-              <p className="col-8 col-md-8 text-end createdAt noMargin">
-                Community member since created_at
               </p>
             </div>
           </li>

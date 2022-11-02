@@ -42,8 +42,8 @@ const typeDefs = gql`
 
   type Friend {
     _id: ID
-    client: Client
-    vendor: Vendor
+    client: String
+    vendor: String
     status: Int!
   }
 
@@ -67,9 +67,12 @@ const typeDefs = gql`
     client(username: String!): Client
     vendor(username: String!): Vendor
 
+    clientFriend: [Friend]
+    vendorFriend: [Friend]
+    friends: [Friend]
+
     items(username: String): [Item]
     pastOrders: [Ordered]
-    friend: [Friend]
   }
 
   type Mutation {
@@ -93,20 +96,17 @@ const typeDefs = gql`
     loginClient(email: String!, password: String!): clientAuth
     loginVendor(email: String!, password: String!): vendorAuth
 
-    editClient(
-      _id: ID!
-      shopName: String!
-      description: String
-      phone: String
-    ): Client
+    editClient(shopName: String!, description: String, phone: String): Client
     editVendor(shopName: String!, description: String, phone: String): Vendor
+
+    addClientFriend(client: String!): Friend
+    addVendorFriend(vendor: String!): Friend
+
+    acceptFriendReq(friendship: ID!): Friend
+    deleteFriendReq(friendship: ID!): Friend
 
     addItem(name: String!, stock: Int!, price: Int!): Item
     addVendToClient(vendorId: ID!): Client
-    addClientFriend(client: ID!): Friend
-    addVendorFriend(vendor: ID!): Friend
-    acceptFriendReq(friendship: ID!): Friend
-    deleteFriendReq(friendship: ID!): Friend
   }
 `;
 

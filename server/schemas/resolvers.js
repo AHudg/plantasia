@@ -63,8 +63,20 @@ const resolvers = {
       return Ordered.find({});
     },
 
-    friend: async () => {
-      return Friend.find({}).populate("client").populate("vendor");
+    clientFriend: async (parent, arg, context) => {
+      if (context.user) {
+        return Friend.find({ vendor: context.user.username });
+      }
+    },
+
+    vendorFriend: async (parent, arg, context) => {
+      if (context.user) {
+        return Friend.find({ vendor: context.user.username });
+      }
+    },
+
+    friends: async () => {
+      return Friend.find({});
     },
   },
   Mutation: {
@@ -166,7 +178,7 @@ const resolvers = {
       if (context.user) {
         const friendship = {
           client: client,
-          vendor: context.user._id,
+          vendor: context.user.username,
           status: 2,
         };
         const updateFriendship = await Friend.create(friendship);
@@ -177,8 +189,8 @@ const resolvers = {
           { new: true }
         );
 
-        await Client.findByIdAndUpdate(
-          { _id: client },
+        await Client.findOneAndUpdate(
+          { username: client },
           { $addToSet: { friend: updateFriendship._id } },
           { new: true }
         );
