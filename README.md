@@ -11,7 +11,6 @@ The desired outcome of this application is to connect small businesses to wholes
 - [Developers](#developers)
 - [MVP](#MVP)
 - [Installation Instructions](#installation-instructions)
-- [Database Relations](#database-relations)
 - [Tech Stack](#tech-stack)
 - [Stretch Goals](#stretch-goals)
 - [Contact Information](#contact-information)
